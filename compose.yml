@@ -1,0 +1,18 @@
+version: '3'
+services:
+  duegevfrontend:
+    image: duegevfrontend:0.1.0
+    environment:
+      - PORT=80
+      - HOST=0.0.0.0
+    env_file:
+      - .env
+    restart: unless-stopped
+    networks: 
+      unicumnet: 
+        ipv4_address: 172.20.0.50
+
+networks:
+  unicumnet:
+    name: opt_unicumnet
+    external: true
