@@ -2,3 +2,18 @@
     text-align: center !important;
     font-size: small;
 }
+
+#duegev_branding {
+    user-select: none;
+}
+
+#credits {
+    font-size: small;
+    opacity: 0.959;
+    font-style: italic;
+    margin: 10px;
+}
+
+#credits a {
+    color: blue;
+}

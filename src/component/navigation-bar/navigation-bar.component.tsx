@@ -44,6 +44,11 @@ function NavigationBar() {
                         </ListItem>
                     ))}
                 </List>
+                <Divider />
+                <p id="credits">
+                &copy; FrancisStudios - All intellectual and distribution rights reserved by author 
+                <a href='https://github.com/francisstudios'> github.com/francisstudios</a>
+                </p>
             </Box>
         )
     }
@@ -72,7 +77,7 @@ function NavigationBar() {
                         >
                             <MenuIcon />
                         </IconButton>
-                        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} id='duegev_branding'>
                             DÛGEV WIKI
                         </Typography>
                         <TextField

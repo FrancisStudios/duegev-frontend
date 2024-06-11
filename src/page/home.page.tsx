@@ -6,6 +6,17 @@ function HomePage() {
     return (
         <div id='card_scroller'>
             <Post></Post>
+            <Post></Post>
+            <Post></Post>
+            <Post></Post>
+            <Post></Post>
+            <Post></Post>
+            <Post></Post>
+            <Post></Post>
+            <Post></Post>
+            <Post></Post>
+            <Post></Post>
+            <Post></Post>
         </div>
     );
 }
