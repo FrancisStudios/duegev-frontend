@@ -34,7 +34,7 @@ function NavigationBar() {
                 </List>
                 <Divider />
                 <List>
-                    {['Blin', 'Jezek', 'Bóbr'].map((text, index) => (
+                    {['Pingwyn', 'Jezek', 'Bóbr'].map((text, index) => (
                         <ListItem key={text} disablePadding>
                             <ListItemButton>
                                 <ListItemIcon>
