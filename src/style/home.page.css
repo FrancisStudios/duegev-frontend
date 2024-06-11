@@ -1,0 +1,13 @@
+html body  {
+    margin: 0px;
+    padding: 0px;
+    overflow: hidden;
+}
+
+#content_conftainer {
+    border: 1px solid red;
+    position: absolute;
+    width: 100%;
+    height: 90%;
+    overflow: hidden;
+}

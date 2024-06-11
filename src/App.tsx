@@ -35,7 +35,9 @@ function App() {
     <ThemeProvider theme={customTheme}>
       <CssBaseline />
       <NavigationBar></NavigationBar>
-      {getPage(page)}
+      <div id="content_conftainer">
+        {getPage(page)}
+      </div>
     </ThemeProvider>
   )
 }
