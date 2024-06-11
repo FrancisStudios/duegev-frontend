@@ -22,7 +22,7 @@ function NavigationBar() {
         return (
             <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
                 <List>
-                    {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+                    {['Home', 'Create', 'Manage', 'Login'].map((text, index) => (
                         <ListItem key={text} disablePadding>
                             <ListItemButton>
                                 <ListItemIcon>
