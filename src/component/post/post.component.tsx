@@ -2,10 +2,11 @@ import { Avatar, Card, CardActions, CardContent, CardHeader, CardMedia, IconButt
 import { red } from "@mui/material/colors"
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
+import './post.component.css';
 
 const Post = () => {
     return (
-        <Card sx={{ maxWidth: 345 }}>
+        <Card id="post_card">
           <CardHeader
             avatar={
               <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">

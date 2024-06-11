@@ -1,5 +1,6 @@
-import HomePage from './page/home.page';
 import './style/home.page.css';
+import './style/main.css';
+import HomePage from './page/home.page';
 import getCustomTheme from './util/theme.util';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';

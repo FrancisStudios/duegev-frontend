@@ -4,7 +4,9 @@ import '../style/home.page.css';
 
 function HomePage() {
     return (
-        <Post></Post>
+        <div id='card_scroller'>
+            <Post></Post>
+        </div>
     );
 }
 
