@@ -3,6 +3,7 @@ import './style/home.page.css';
 import getCustomTheme from './util/theme.util';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import NavigationBar from './component/navigation-bar/navigation-bar.component';
 
 function App() {
   const page = 'home';
@@ -33,6 +34,7 @@ function App() {
   return (
     <ThemeProvider theme={customTheme}>
       <CssBaseline />
+      <NavigationBar></NavigationBar>
       {getPage(page)}
     </ThemeProvider>
   )
