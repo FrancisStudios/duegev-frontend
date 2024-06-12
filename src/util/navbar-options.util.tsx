@@ -9,6 +9,10 @@ const NavbarDefaultMenu = {
         {
             text: 'SEARCH',
             action: '',
+        },
+        {
+            text: 'MAP',
+            action: '',
         }
     ]
 }
