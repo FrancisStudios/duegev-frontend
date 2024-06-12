@@ -21,6 +21,8 @@ function NavigationBar() {
     const DrawerContents = () => {
         return (
             <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
+                <h2 id='sidebar_branding'>DÛGEV WIKI</h2>
+                <Divider />
                 <List>
                     {['Home', 'Create', 'Manage', 'Login'].map((text, index) => (
                         <ListItem key={text} disablePadding>
@@ -46,8 +48,8 @@ function NavigationBar() {
                 </List>
                 <Divider />
                 <p id="credits">
-                &copy; FrancisStudios - All intellectual and distribution rights reserved by author 
-                <a href='https://github.com/francisstudios'> github.com/francisstudios</a>
+                    &copy; FrancisStudios - All intellectual and distribution rights reserved by author
+                    <a href='https://github.com/francisstudios'> github.com/francisstudios</a>
                 </p>
             </Box>
         )

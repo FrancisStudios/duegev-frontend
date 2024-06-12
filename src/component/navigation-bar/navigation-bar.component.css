@@ -17,3 +17,8 @@
 #credits a {
     color: blue;
 }
+
+#sidebar_branding {
+    text-align: center;
+    user-select: none;
+}
