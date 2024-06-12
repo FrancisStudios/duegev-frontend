@@ -30,7 +30,7 @@ function NavigationBar() {
                 <List>
                     {NavbarDefaultMenu.options.map((option, index) => (
                         <ListItem key={option.text} disablePadding>
-                            <ListItemButton>
+                            <ListItemButton onClick={e=>option.action(e)}>
                                 <ListItemIcon>
                                 </ListItemIcon>
                                 <ListItemText primary={getString(option.text as keyof LanguageModel)} />
@@ -44,7 +44,7 @@ function NavigationBar() {
                         if (User.isLoggedIn === options.isLoginRequired) {
                             return (
                                 <ListItem key={options.text} disablePadding>
-                                    <ListItemButton>
+                                    <ListItemButton onClick={e=>options.action(e)}>
                                         <ListItemIcon>
                                         </ListItemIcon>
                                         <ListItemText primary={getString(options.text as keyof LanguageModel)} />

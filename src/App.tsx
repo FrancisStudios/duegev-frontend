@@ -5,9 +5,10 @@ import getCustomTheme from './util/theme.util';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import NavigationBar from './component/navigation-bar/navigation-bar.component';
+import RoutingService from './services/custom-routing.service';
 
 function App() {
-  const page = 'home';
+  const page = RoutingService.getURLPath()[0];
 
 
   /**
@@ -24,6 +25,13 @@ function App() {
   const getPage = (page: string) => {
     switch (page) {
       case 'home':
+        console.log('home page');
+        return <HomePage></HomePage>;
+      case 'login':
+        console.log('login page');
+        break;
+      
+      default: 
         return <HomePage></HomePage>;
     }
   }

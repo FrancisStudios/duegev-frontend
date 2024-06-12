@@ -1,55 +1,67 @@
-import { LanguageModel } from "../type/language.type"
+import PAGES from "../enum/valid-page-locations.enum"
+import RoutingService from "../services/custom-routing.service"
+import { Menu } from "../type/menu-item.type"
 
-const NavbarDefaultMenu = {
+const NavbarDefaultMenu: Menu = {
     options: [
         {
             text: 'HOME',
-            action: '',
+            action: (e: React.MouseEvent<HTMLInputElement>) => {
+                navigate(PAGES.HOME, e);
+            },
         },
         {
             text: 'SEARCH',
-            action: '',
+            action: () => { },
         },
         {
             text: 'MAP',
-            action: '',
+            action: () => { },
         }
     ]
 }
 
-const NavbarUserMenu = {
+const NavbarUserMenu: Menu = {
     options: [
         {
             text: 'LOGIN',
             isLoginRequired: false,
-            action: '',
+            action: (e: React.MouseEvent<HTMLInputElement>) => {
+                navigate(PAGES.LOGIN, e);
+            },
         },
         {
             text: 'LOGOUT',
             isLoginRequired: true,
-            action: '',
+            action: () => { },
         },
         {
             text: 'CREATE',
             isLoginRequired: true,
-            action: '',
+            action: () => { },
         },
         {
             text: 'ARTICLES',
             isLoginRequired: true,
-            action: '',
+            action: () => { },
         },
         {
             text: 'SETTINGS',
             isLoginRequired: true,
-            action: '',
+            action: () => { },
         },
         {
             text: 'PRIVILEGES',
             isLoginRequired: true,
-            action: '',
+            action: () => { },
         }
     ]
+}
+
+const navigate = (page: PAGES, e: React.MouseEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    RoutingService.navigate(page);
 }
 
 export {
