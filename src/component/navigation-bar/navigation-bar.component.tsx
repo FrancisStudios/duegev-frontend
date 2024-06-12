@@ -7,6 +7,9 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { Divider, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, TextField } from '@mui/material';
 import './navigation-bar.component.css';
 import React from 'react';
+import { NavbarDefaultMenu } from '../../util/navbar-options.util';
+import getString from '../../util/language-server.util';
+import { LanguageModel } from '../../type/language.type';
 
 function NavigationBar() {
 
@@ -24,12 +27,12 @@ function NavigationBar() {
                 <h2 id='sidebar_branding'>DÛGEV WIKI</h2>
                 <Divider />
                 <List>
-                    {['Home', 'Create', 'Manage', 'Login'].map((text, index) => (
-                        <ListItem key={text} disablePadding>
+                    {NavbarDefaultMenu.options.map((option, index) => (
+                        <ListItem key={option.text} disablePadding>
                             <ListItemButton>
                                 <ListItemIcon>
                                 </ListItemIcon>
-                                <ListItemText primary={text} />
+                                <ListItemText primary={getString(option.text as keyof LanguageModel)} />
                             </ListItemButton>
                         </ListItem>
                     ))}
