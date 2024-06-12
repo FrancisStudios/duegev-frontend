@@ -25,10 +25,9 @@ function App() {
   const getPage = (page: string) => {
     switch (page) {
       case 'home':
-        console.log('home page');
         return <HomePage></HomePage>;
       case 'login':
-        console.log('login page');
+        //return <LoginPage></LoginPage>
         break;
       
       default: 
