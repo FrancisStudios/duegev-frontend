@@ -1,3 +1,4 @@
+import './navigation-bar.component.css';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -5,16 +6,16 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Divider, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, TextField } from '@mui/material';
-import './navigation-bar.component.css';
 import React from 'react';
-import { NavbarDefaultMenu } from '../../util/navbar-options.util';
+import { NavbarDefaultMenu, NavbarUserMenu } from '../../util/navbar-options.util';
 import getString from '../../util/language-server.util';
 import { LanguageModel } from '../../type/language.type';
+import User from '../../services/user-auth.service';
 
 function NavigationBar() {
-
     const [open, setOpen] = React.useState(false);
 
+    const user: User = User.getInstance();
 
     const toggleDrawer = (newOpen: boolean) => () => {
         setOpen(newOpen);
@@ -39,15 +40,19 @@ function NavigationBar() {
                 </List>
                 <Divider />
                 <List>
-                    {['Pingwyn', 'Jezek', 'Bóbr'].map((text, index) => (
-                        <ListItem key={text} disablePadding>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                </ListItemIcon>
-                                <ListItemText primary={text} />
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
+                    {NavbarUserMenu.options.map((options, index) => {
+                        if (User.isLoggedIn === options.isLoginRequired) {
+                            return (
+                                <ListItem key={options.text} disablePadding>
+                                    <ListItemButton>
+                                        <ListItemIcon>
+                                        </ListItemIcon>
+                                        <ListItemText primary={getString(options.text as keyof LanguageModel)} />
+                                    </ListItemButton>
+                                </ListItem>
+                            )
+                        }
+                    })}
                 </List>
                 <Divider />
                 <p id="credits">

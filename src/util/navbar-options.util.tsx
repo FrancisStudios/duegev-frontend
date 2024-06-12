@@ -18,7 +18,38 @@ const NavbarDefaultMenu = {
 }
 
 const NavbarUserMenu = {
-
+    options: [
+        {
+            text: 'LOGIN',
+            isLoginRequired: false,
+            action: '',
+        },
+        {
+            text: 'LOGOUT',
+            isLoginRequired: true,
+            action: '',
+        },
+        {
+            text: 'CREATE',
+            isLoginRequired: true,
+            action: '',
+        },
+        {
+            text: 'ARTICLES',
+            isLoginRequired: true,
+            action: '',
+        },
+        {
+            text: 'SETTINGS',
+            isLoginRequired: true,
+            action: '',
+        },
+        {
+            text: 'PRIVILEGES',
+            isLoginRequired: true,
+            action: '',
+        }
+    ]
 }
 
 export {
