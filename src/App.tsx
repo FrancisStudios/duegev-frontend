@@ -11,7 +11,6 @@ import LoginPage from './page/login.page';
 function App() {
   const page = RoutingService.getURLPath()[0];
 
-
   /**
    * Bootstrapping Custom Defined
    * theme w/mui
