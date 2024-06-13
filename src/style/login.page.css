@@ -1,0 +1,16 @@
+#login-page-wrapper {
+    border: 1px solid red;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+#login-page-wrapper > #duegev_login_card {
+    user-select: none;
+    width: 350px;
+    max-width: 400px !important;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}

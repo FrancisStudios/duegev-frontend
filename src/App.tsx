@@ -6,6 +6,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import NavigationBar from './component/navigation-bar/navigation-bar.component';
 import RoutingService from './services/custom-routing.service';
+import LoginPage from './page/login.page';
 
 function App() {
   const page = RoutingService.getURLPath()[0];
@@ -27,8 +28,7 @@ function App() {
       case 'home':
         return <HomePage></HomePage>;
       case 'login':
-        //return <LoginPage></LoginPage>
-        break;
+        return <LoginPage></LoginPage>;
       
       default: 
         return <HomePage></HomePage>;
