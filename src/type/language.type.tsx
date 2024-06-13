@@ -14,6 +14,13 @@ type LanguageModel = {
     LOGIN_MGMT_DISCLAIMER: string
 }
 
+enum ValidLanguages {
+    DYNARI = 'dn',
+    ENGLISH = 'en',
+    HUNGARIAN = 'hu',
+}
+
 export type {
-    LanguageModel
+    LanguageModel,
+    ValidLanguages
 }
