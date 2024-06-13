@@ -1,5 +1,5 @@
 import '../style/login.page.css';
-import { Button, Card, CardActions, CardContent } from "@mui/material";
+import { Button, Card, CardActions, CardContent, Divider, TextField } from "@mui/material";
 import Typography from '@mui/material/Typography';
 
 const LoginPage = () => {
@@ -10,16 +10,13 @@ const LoginPage = () => {
                     <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                         Dûgev Wiki Login™
                     </Typography>
-                    <Typography variant="h5" component="div">
-                        blin
-                    </Typography>
-                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                        adjective
-                    </Typography>
-                    <Typography variant="body2">
-                        well meaning and kindly.
-                        <br />
-                        {'"a benevolent smile"'}
+                    <div id="duegev-login-form">
+                        <TextField id="duegev-username" label="Username" variant="outlined" />
+                        <TextField id="duegev-password" label="Password" variant="outlined" />
+                    </div>
+                    <Divider />
+                    <Typography variant="body2" id="duegev-login-disclaimer">
+                        Your login information is managed by the Brotherhood of Unicum™ subnet.
                     </Typography>
                 </CardContent>
                 <CardActions>
