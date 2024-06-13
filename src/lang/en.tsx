@@ -9,7 +9,11 @@ const lang_en: LanguageModel = {
     CREATE: 'Create',
     ARTICLES: 'Articles',
     SETTINGS: 'Settings',
-    PRIVILEGES: 'Privileges'
+    PRIVILEGES: 'Privileges',
+    LOG_IN: 'Log In',
+    USERNAME: 'Username',
+    PASSWORD: 'Password',
+    LOGIN_MGMT_DISCLAIMER: 'Your login information is managed by the Brotherhood of Unicum™ subnet'
 }
 
 export default lang_en;

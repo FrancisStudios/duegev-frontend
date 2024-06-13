@@ -1,6 +1,8 @@
 import '../style/login.page.css';
 import { Button, Card, CardActions, CardContent, Divider, TextField } from "@mui/material";
 import Typography from '@mui/material/Typography';
+import { LanguageModel } from '../type/language.type';
+import getString from '../util/language-server.util';
 
 const LoginPage = () => {
     return (
@@ -11,16 +13,16 @@ const LoginPage = () => {
                         Dûgev Wiki Login™
                     </Typography>
                     <div id="duegev-login-form">
-                        <TextField id="duegev-username" label="Username" variant="outlined" />
-                        <TextField id="duegev-password" label="Password" variant="outlined" />
+                        <TextField id="duegev-username" label={getString('USERNAME')} variant="outlined" />
+                        <TextField id="duegev-password" label={getString('PASSWORD')} variant="outlined" />
                     </div>
                     <Divider />
                     <Typography variant="body2" id="duegev-login-disclaimer">
-                        Your login information is managed by the Brotherhood of Unicum™ subnet.
+                        {getString('LOGIN_MGMT_DISCLAIMER')}
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Button size="small">Log In</Button>
+                    <Button size="small">{getString('LOG_IN')}</Button>
                 </CardActions>
             </Card>
         </div>

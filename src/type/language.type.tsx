@@ -7,7 +7,11 @@ type LanguageModel = {
     CREATE: string,
     ARTICLES: string,
     SETTINGS: string,
-    PRIVILEGES: string
+    PRIVILEGES: string,
+    LOG_IN: string,
+    USERNAME: string,
+    PASSWORD: string,
+    LOGIN_MGMT_DISCLAIMER: string
 }
 
 export type {
