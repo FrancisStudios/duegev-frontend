@@ -4,7 +4,7 @@
  */
 class User {
     private static instance: User;
-    public static readonly isLoggedIn: boolean = false;
+    public static readonly isLoggedIn: boolean = true;
 
     private constructor() { }
 

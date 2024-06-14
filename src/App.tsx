@@ -7,9 +7,11 @@ import CssBaseline from '@mui/material/CssBaseline';
 import NavigationBar from './component/navigation-bar/navigation-bar.component';
 import RoutingService from './services/custom-routing.service';
 import LoginPage from './page/login.page';
+import PAGES from './enum/valid-page-locations.enum';
+import CreatePage from './page/creator.page';
 
 function App() {
-  const page = RoutingService.getURLPath()[0];
+  const page: PAGES = RoutingService.getURLPath()[0] as PAGES;
 
   /**
    * Bootstrapping Custom Defined
@@ -22,14 +24,16 @@ function App() {
    * only page selection template
    * allowed!
    */
-  const getPage = (page: string) => {
+  const getPage = (page: PAGES) => {
     switch (page) {
-      case 'home':
+      case PAGES.HOME:
         return <HomePage></HomePage>;
-      case 'login':
+      case PAGES.LOGIN:
         return <LoginPage></LoginPage>;
-      
-      default: 
+      case PAGES.CREATE:
+        return <CreatePage></CreatePage>;
+
+      default:
         return <HomePage></HomePage>;
     }
   }

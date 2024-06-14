@@ -38,7 +38,9 @@ const NavbarUserMenu: Menu = {
         {
             text: 'CREATE',
             isLoginRequired: true,
-            action: () => { },
+            action: (e: React.MouseEvent<HTMLInputElement>) => { 
+                navigate(PAGES.CREATE, e);
+            },
         },
         {
             text: 'ARTICLES',

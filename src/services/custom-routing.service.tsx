@@ -43,6 +43,10 @@ class RoutingService {
             case PAGES.LOGIN:
                 window.location.pathname = '/login';
                 break;
+
+            case PAGES.CREATE:
+                window.location.pathname = '/create';
+                break;
         }
     }
 }

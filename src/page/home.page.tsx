@@ -17,26 +17,13 @@ function HomePage() {
         });
     }, []);
 
-    console.log(articles);
-
     const NewsFeedContent = () => {
-
+        return articles.map((article: Article) => (<Post data={article} key={article.article_id}></Post>));
     }
 
     return (
         <div id='card_scroller'>
-            <Post></Post>
-            <Post></Post>
-            <Post></Post>
-            <Post></Post>
-            <Post></Post>
-            <Post></Post>
-            <Post></Post>
-            <Post></Post>
-            <Post></Post>
-            <Post></Post>
-            <Post></Post>
-            <Post></Post>
+            {NewsFeedContent()}
         </div>
     );
 }

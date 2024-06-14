@@ -39,7 +39,7 @@ export class ArticleAPI {
                             },
                             {
                                 title: 'This is an article',
-                                text: 'Text of a mock article, this is somekinda lorem ipsum of a sort, or whatever...',
+                                text: 'This is a secondary mock article, with some other jibberish text. Enjoy!',
                                 game_date: 2311,
                                 real_date: '2024-06-13',
                                 author_id: 1,

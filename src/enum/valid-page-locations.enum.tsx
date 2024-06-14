@@ -6,7 +6,8 @@
 
 enum PAGES {
     HOME = 'home',
-    LOGIN = 'login'
+    LOGIN = 'login',
+    CREATE = 'create'
 }
 
 export default PAGES;

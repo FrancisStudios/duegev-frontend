@@ -3,10 +3,15 @@ import { red } from "@mui/material/colors"
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import './post.component.css';
+import { Article } from "../../type/article.type";
 
-const Post = () => {
+export type PostComponentProps = {
+  data: Article
+}
+
+const Post = (props: PostComponentProps) => {
     return (
-        <Card id="post_card">
+        <Card className="post_card" key={props.data.article_id}>
           <CardHeader
             avatar={
               <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -18,9 +23,7 @@ const Post = () => {
           />
           <CardContent>
             <Typography variant="body2" color="text.secondary">
-              This impressive paella is a perfect party dish and a fun meal to cook
-              together with your guests. Add 1 cup of frozen peas along with the mussels,
-              if you like.
+              {props.data.text}
             </Typography>
           </CardContent>
           <CardActions disableSpacing>
