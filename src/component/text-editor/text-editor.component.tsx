@@ -4,6 +4,7 @@ import { Tabs } from "@mui/base";
 import { Button, Card, CardActions, CardContent, Step, StepButton, Stepper, Tab, Typography } from "@mui/material";
 import React from "react";
 import './text-editor.component.css';
+import { DuegevTextEditorUtil } from "./text-editor.helper";
 
 export type TextEditorProps = {
     edit?: Article,
@@ -27,59 +28,41 @@ const TextEditor = (props: TextEditorProps) => {
     const [activeStep, setActiveStep] = React.useState(0);
     const [completed, setCompleted] = React.useState<{ [k: number]: boolean; }>({});
 
-    const totalSteps = () => {
-        return steps.length;
-    };
 
-    const completedSteps = () => {
-        return Object.keys(completed).length;
-    };
+    /**
+     * Step Button handlers - helpers are in the 
+     * text-editor.helper.tsx utility class -->
+     */
+    const handlers = {
+        next: () => {
+            const newActiveStep =
+                DuegevTextEditorUtil.isLastStep(activeStep, steps) && !DuegevTextEditorUtil.allStepsCompleted(completed, steps)
+                    ? steps.findIndex((step, i) => !(i in completed))
+                    : activeStep + 1;
+            setActiveStep(newActiveStep);
+        },
+        back: () => { setActiveStep((prevActiveStep) => prevActiveStep - 1); },
+        step: (step: number) => () => { setActiveStep(step); },
+        complete: () => {
+            const newCompleted = completed;
+            newCompleted[activeStep] = true;
+            setCompleted(newCompleted);
+            handlers.next();
+        },
+        reset: () => { setActiveStep(0); setCompleted({}); }
+    }
 
-    const isLastStep = () => {
-        return activeStep === totalSteps() - 1;
-    };
-
-    const allStepsCompleted = () => {
-        return completedSteps() === totalSteps();
-    };
-
-    const handleNext = () => {
-        const newActiveStep =
-            isLastStep() && !allStepsCompleted()
-                ? // It's the last step, but not all steps have been completed,
-                // find the first step that has been completed
-                steps.findIndex((step, i) => !(i in completed))
-                : activeStep + 1;
-        setActiveStep(newActiveStep);
-    };
-
-    const handleBack = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep - 1);
-    };
-
-    const handleStep = (step: number) => () => {
-        setActiveStep(step);
-    };
-
-    const handleComplete = () => {
-        const newCompleted = completed;
-        newCompleted[activeStep] = true;
-        setCompleted(newCompleted);
-        handleNext();
-    };
-
-    const handleReset = () => {
-        setActiveStep(0);
-        setCompleted({});
-    };
-
+    /**
+     * Sub compoents for the Text Editor
+     * Steppers and Panels should be here
+     */
     const TextEditorStepper = () => {
         return (
             <Box sx={{ width: '100%' }}>
                 <Stepper nonLinear activeStep={activeStep}>
                     {steps.map((label, index) => (
                         <Step key={label} completed={completed[index]}>
-                            <StepButton color="inherit" onClick={handleStep(index)}>
+                            <StepButton color="inherit" onClick={handlers.step(index)}>
                                 {label}
                             </StepButton>
                         </Step>
@@ -92,14 +75,14 @@ const TextEditor = (props: TextEditorProps) => {
     const TextEditorStepperActions = () => {
         return (
             <div>
-                {allStepsCompleted() ? (
+                {DuegevTextEditorUtil.allStepsCompleted(completed, steps) ? (
                     <React.Fragment>
                         <Typography sx={{ mt: 2, mb: 1 }}>
                             All steps completed - you&apos;re finished
                         </Typography>
                         <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
                             <Box sx={{ flex: '1 1 auto' }} />
-                            <Button onClick={handleReset}>Reset</Button>
+                            <Button onClick={handlers.reset}>Reset</Button>
                         </Box>
                     </React.Fragment>
                 ) : (
@@ -111,13 +94,13 @@ const TextEditor = (props: TextEditorProps) => {
                             <Button
                                 color="inherit"
                                 disabled={activeStep === 0}
-                                onClick={handleBack}
+                                onClick={handlers.back}
                                 sx={{ mr: 1 }}
                             >
                                 Back
                             </Button>
                             <Box sx={{ flex: '1 1 auto' }} />
-                            <Button onClick={handleNext} sx={{ mr: 1 }}>
+                            <Button onClick={handlers.next} sx={{ mr: 1 }}>
                                 Next
                             </Button>
                             {activeStep !== steps.length &&
@@ -126,8 +109,8 @@ const TextEditor = (props: TextEditorProps) => {
                                         Step {activeStep + 1} already completed
                                     </Typography>
                                 ) : (
-                                    <Button onClick={handleComplete}>
-                                        {completedSteps() === totalSteps() - 1
+                                    <Button onClick={handlers.complete}>
+                                        {DuegevTextEditorUtil.completedSteps(completed) === DuegevTextEditorUtil.totalSteps(steps) - 1
                                             ? 'Finish'
                                             : 'Complete Step'}
                                     </Button>
@@ -139,15 +122,19 @@ const TextEditor = (props: TextEditorProps) => {
         );
     }
 
+    /**
+     * Main Component return is here
+     * sub components are above bby :3
+     */
     return (
-        <Card id="duegev-text-editor">
+        <Card id="duegev-text-editor" >
             <CardContent>
                 {TextEditorStepper()}
             </CardContent>
             <CardActions>
                 {TextEditorStepperActions()}
             </CardActions>
-        </Card>
+        </Card >
     );
 }
 
