@@ -1,14 +1,14 @@
-import { Box } from "@mui/system";
-import { Article, ArticleLabels } from "../../type/article.type";
-import { Tabs } from "@mui/base";
-import { Button, Card, CardActions, CardContent, Step, StepButton, Stepper, Tab, Typography } from "@mui/material";
 import React from "react";
 import './text-editor.component.css';
+import { Box } from "@mui/system";
+import { Article, ArticleLabels } from "../../type/article.type";
+import { Button, Card, CardActions, CardContent, Step, StepButton, Stepper, Typography } from "@mui/material";
 import { DuegevTextEditorUtil } from "./text-editor.helper";
+import getString from "../../util/language-server.util";
+
 
 export type TextEditorProps = {
-    edit?: Article,
-    prefill?: TextEditorPrefill
+    prefill?: TextEditorPrefill | Article
 }
 
 type TextEditorPrefill = {
@@ -21,7 +21,7 @@ type TextEditorPrefill = {
     labels?: Array<ArticleLabels>
 }
 
-const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad'];
+const steps: Array<string> = [getString('METADATA_TE') as string, getString('ARTICLE_TEXT_TE') as string, getString('PREVIEW_TE') as string];
 
 const TextEditor = (props: TextEditorProps) => {
 
@@ -78,18 +78,16 @@ const TextEditor = (props: TextEditorProps) => {
                 {DuegevTextEditorUtil.allStepsCompleted(completed, steps) ? (
                     <React.Fragment>
                         <Typography sx={{ mt: 2, mb: 1 }}>
-                            All steps completed - you&apos;re finished
+                            {getString('ALL_STEPS_COMPLETED_TE_MSG')}
                         </Typography>
                         <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
                             <Box sx={{ flex: '1 1 auto' }} />
-                            <Button onClick={handlers.reset}>Reset</Button>
+                            <Button onClick={handlers.reset}>{getString('PUBLISH')}</Button>
                         </Box>
                     </React.Fragment>
                 ) : (
                     <React.Fragment>
-                        <Typography sx={{ mt: 2, mb: 1, py: 1 }}>
-                            Step {activeStep + 1}
-                        </Typography>
+                        {TextEditorViewServer(activeStep)}
                         <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
                             <Button
                                 color="inherit"
@@ -97,22 +95,22 @@ const TextEditor = (props: TextEditorProps) => {
                                 onClick={handlers.back}
                                 sx={{ mr: 1 }}
                             >
-                                Back
+                                {getString('BACK')}
                             </Button>
                             <Box sx={{ flex: '1 1 auto' }} />
                             <Button onClick={handlers.next} sx={{ mr: 1 }}>
-                                Next
+                                {getString('NEXT')}
                             </Button>
                             {activeStep !== steps.length &&
                                 (completed[activeStep] ? (
                                     <Typography variant="caption" sx={{ display: 'inline-block' }}>
-                                        Step {activeStep + 1} already completed
+                                        {/* If something is done I can put a text here */}
                                     </Typography>
                                 ) : (
                                     <Button onClick={handlers.complete}>
                                         {DuegevTextEditorUtil.completedSteps(completed) === DuegevTextEditorUtil.totalSteps(steps) - 1
-                                            ? 'Finish'
-                                            : 'Complete Step'}
+                                            ? getString('FINISH_TE')
+                                            : getString('COMPLETE')}
                                     </Button>
                                 ))}
                         </Box>
@@ -120,6 +118,31 @@ const TextEditor = (props: TextEditorProps) => {
                 )}
             </div>
         );
+    }
+
+    const TextEditorViewServer = (activeStep: number) => {
+        switch (activeStep) {
+            case 0:
+                return <TextEditorMetadataForm></TextEditorMetadataForm>;
+
+            case 1:
+                return <TextEditorEditorView></TextEditorEditorView>;
+
+            case 2:
+                return <TextEditorPreview></TextEditorPreview>;
+        }
+    }
+
+    const TextEditorMetadataForm = () => {
+        return (<>metadata</>);
+    }
+
+    const TextEditorEditorView = () => {
+        return (<>editor view</>);
+    }
+
+    const TextEditorPreview = () => {
+        return (<>preview</>);
     }
 
     /**
