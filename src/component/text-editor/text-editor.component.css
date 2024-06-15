@@ -5,3 +5,44 @@
     transform: translate(-50%, 0%);
     margin-top: 20px;
 }
+
+#duegev-te-cc-wrapper {
+    width: 100%;
+}
+
+#editor-stepper-card-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 100% !important;
+}
+
+#text-editor-content-wrapper{
+    padding: 8px;
+}
+
+#metadata-editor-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#duegev-te-title-field {
+    width: 100%;
+}
+
+#text-editor-stepper-handlers {
+    display: block;
+    position: relative;
+}
+
+#duegev-article-auth-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+#duegev-article-auth-info .field {
+    width: 100%;
+}

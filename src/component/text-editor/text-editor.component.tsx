@@ -1,8 +1,8 @@
 import React from "react";
 import './text-editor.component.css';
-import { Box } from "@mui/system";
+import { Box, border } from "@mui/system";
 import { Article, ArticleLabels } from "../../type/article.type";
-import { Button, Card, CardActions, CardContent, Step, StepButton, Stepper, Typography } from "@mui/material";
+import { Button, Card, CardActions, CardContent, Step, StepButton, Stepper, TextField, Typography } from "@mui/material";
 import { DuegevTextEditorUtil } from "./text-editor.helper";
 import getString from "../../util/language-server.util";
 
@@ -74,7 +74,7 @@ const TextEditor = (props: TextEditorProps) => {
 
     const TextEditorStepperActions = () => {
         return (
-            <div>
+            <div id="duegev-te-cc-wrapper">
                 {DuegevTextEditorUtil.allStepsCompleted(completed, steps) ? (
                     <React.Fragment>
                         <Typography sx={{ mt: 2, mb: 1 }}>
@@ -87,33 +87,39 @@ const TextEditor = (props: TextEditorProps) => {
                     </React.Fragment>
                 ) : (
                     <React.Fragment>
-                        {TextEditorViewServer(activeStep)}
-                        <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                            <Button
-                                color="inherit"
-                                disabled={activeStep === 0}
-                                onClick={handlers.back}
-                                sx={{ mr: 1 }}
-                            >
-                                {getString('BACK')}
-                            </Button>
-                            <Box sx={{ flex: '1 1 auto' }} />
-                            <Button onClick={handlers.next} sx={{ mr: 1 }}>
-                                {getString('NEXT')}
-                            </Button>
-                            {activeStep !== steps.length &&
-                                (completed[activeStep] ? (
-                                    <Typography variant="caption" sx={{ display: 'inline-block' }}>
-                                        {/* If something is done I can put a text here */}
-                                    </Typography>
-                                ) : (
-                                    <Button onClick={handlers.complete}>
-                                        {DuegevTextEditorUtil.completedSteps(completed) === DuegevTextEditorUtil.totalSteps(steps) - 1
-                                            ? getString('FINISH_TE')
-                                            : getString('COMPLETE')}
+                        <div id="editor-stepper-card-content-wrapper">
+                            <div id="text-editor-content-wrapper">
+                                {TextEditorViewServer(activeStep)}
+                            </div>
+                            <div id="text-editor-stepper-handlers">
+                                <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+                                    <Button
+                                        color="inherit"
+                                        disabled={activeStep === 0}
+                                        onClick={handlers.back}
+                                        sx={{ mr: 1 }}
+                                    >
+                                        {getString('BACK')}
                                     </Button>
-                                ))}
-                        </Box>
+                                    <Box sx={{ flex: '1 1 auto' }} />
+                                    <Button onClick={handlers.next} sx={{ mr: 1 }}>
+                                        {getString('NEXT')}
+                                    </Button>
+                                    {activeStep !== steps.length &&
+                                        (completed[activeStep] ? (
+                                            <Typography variant="caption" sx={{ display: 'inline-block' }}>
+                                                {/* If something is done I can put a text here */}
+                                            </Typography>
+                                        ) : (
+                                            <Button onClick={handlers.complete}>
+                                                {DuegevTextEditorUtil.completedSteps(completed) === DuegevTextEditorUtil.totalSteps(steps) - 1
+                                                    ? getString('FINISH_TE')
+                                                    : getString('COMPLETE')}
+                                            </Button>
+                                        ))}
+                                </Box>
+                            </div>
+                        </div>
                     </React.Fragment>
                 )}
             </div>
@@ -134,7 +140,16 @@ const TextEditor = (props: TextEditorProps) => {
     }
 
     const TextEditorMetadataForm = () => {
-        return (<>metadata</>);
+        return (
+            <div id="metadata-editor-wrapper">
+                <TextField id="duegev-te-title-field" label="Cím" variant="outlined" />
+                <div id="duegev-article-auth-info">
+                    <TextField id="duegev-te-title-field" className="field" label="2410" variant="outlined" />
+                    <TextField id="duegev-te-title-field" className="field" label="Francis" variant="outlined" />
+                    <TextField id="duegev-te-title-field" className="field" label="2024-06-15" variant="outlined" />
+                </div>
+            </div>
+        );
     }
 
     const TextEditorEditorView = () => {
