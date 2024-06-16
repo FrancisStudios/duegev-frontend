@@ -168,7 +168,6 @@ const TextEditor = (props: TextEditorProps) => {
                     <TextField id="duegev-te-title-field" className="field" label="Francis" variant="outlined" disabled />
                     <TextField id="duegev-te-title-field" className="field" label="2024-06-15" variant="outlined" disabled />
                 </div>
-                <Divider></Divider>
                 <div id="duegev-label-selector-wrapper">
                     <OptionSelectCustom options={[{ value: '1', label: 'blin' }]} label={'Label Select'}></OptionSelectCustom>
                     <Button variant="outlined">Add Label</Button>
