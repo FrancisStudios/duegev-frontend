@@ -5,6 +5,7 @@ import { Article, ArticleLabels } from "../../type/article.type";
 import { Button, Card, CardActions, CardContent, Step, StepButton, Stepper, TextField, Typography } from "@mui/material";
 import { DuegevTextEditorUtil } from "./text-editor.helper";
 import getString from "../../util/language-server.util";
+import Post from "../post/post.component";
 
 
 export type TextEditorProps = {
@@ -27,6 +28,17 @@ const TextEditor = (props: TextEditorProps) => {
 
     const [activeStep, setActiveStep] = React.useState(0);
     const [completed, setCompleted] = React.useState<{ [k: number]: boolean; }>({});
+    const [article, setArticle] = React.useState<Article>(
+        {
+            title: '',
+            text: 'Blin blinochki sdfsfsdfsdfsdfsdsdf sdf dsf sdflksd fksd flsdlkf sdk fklsdfl ksdkfl dsk fdsk fljskdf jlkdskfj ldsjlkf ljskdf jlksdjlk fdsljkf jlkds fljksdkl slkfskld flks',
+            game_date: 2410,
+            real_date: '',
+            author_id: 1,
+            article_id: '',
+            labels: ['test label', 'another']
+        }
+    );
 
 
     /**
@@ -145,19 +157,34 @@ const TextEditor = (props: TextEditorProps) => {
                 <TextField id="duegev-te-title-field" label="Cím" variant="outlined" />
                 <div id="duegev-article-auth-info">
                     <TextField id="duegev-te-title-field" className="field" label="2410" variant="outlined" />
-                    <TextField id="duegev-te-title-field" className="field" label="Francis" variant="outlined" />
-                    <TextField id="duegev-te-title-field" className="field" label="2024-06-15" variant="outlined" />
+                    <TextField id="duegev-te-title-field" className="field" label="Francis" variant="outlined" disabled />
+                    <TextField id="duegev-te-title-field" className="field" label="2024-06-15" variant="outlined" disabled />
                 </div>
             </div>
         );
     }
 
     const TextEditorEditorView = () => {
-        return (<>editor view</>);
+        return (
+            <div id="duegev-md-editor-wrapper">
+                <TextField
+                    fullWidth
+                    id="duegev-md-editor"
+                    label="Duegev MD Editor"
+                    multiline
+                    rows={10}
+                    placeholder="Write your document here..."
+                />
+            </div>
+        );
     }
 
     const TextEditorPreview = () => {
-        return (<>preview</>);
+        return (
+            <div id="duegev-md-preview">
+                <Post data={article}></Post>
+            </div>
+        );
     }
 
     /**
