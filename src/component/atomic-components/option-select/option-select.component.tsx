@@ -5,7 +5,7 @@ import MenuItem from '@mui/material/MenuItem';
 export type OptionSelectCustomProps = {
     options: Array<OptionSelectCustomOption>
     label: string,
-    helperText: string,
+    helperText?: string,
     defaultValue?: string,
     id?: string
 }

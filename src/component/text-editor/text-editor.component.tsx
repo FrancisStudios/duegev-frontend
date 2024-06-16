@@ -6,6 +6,7 @@ import { Button, Card, CardActions, CardContent, Step, StepButton, Stepper, Text
 import { DuegevTextEditorUtil } from "./text-editor.helper";
 import getString from "../../util/language-server.util";
 import Post from "../post/post.component";
+import OptionSelectCustom from "../atomic-components/option-select/option-select.component";
 
 
 export type TextEditorProps = {
@@ -159,6 +160,9 @@ const TextEditor = (props: TextEditorProps) => {
                     <TextField id="duegev-te-title-field" className="field" label="2410" variant="outlined" />
                     <TextField id="duegev-te-title-field" className="field" label="Francis" variant="outlined" disabled />
                     <TextField id="duegev-te-title-field" className="field" label="2024-06-15" variant="outlined" disabled />
+                </div>
+                <div id="duegev-label-selector-wrapper">
+                    <OptionSelectCustom options={[{value: '1', label: 'blin'}]} label={'Label Select'} helperText={'Label Select HT'}></OptionSelectCustom>
                 </div>
             </div>
         );
