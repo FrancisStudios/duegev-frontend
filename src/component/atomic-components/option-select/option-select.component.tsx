@@ -10,7 +10,7 @@ export type OptionSelectCustomProps = {
     id?: string
 }
 
-type OptionSelectCustomOption = {
+export type OptionSelectCustomOption = {
     value: string,
     label: string
 }

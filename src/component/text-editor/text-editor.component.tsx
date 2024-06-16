@@ -2,11 +2,12 @@ import React from "react";
 import './text-editor.component.css';
 import { Box, border } from "@mui/system";
 import { Article, ArticleLabels } from "../../type/article.type";
-import { Button, Card, CardActions, CardContent, Step, StepButton, Stepper, TextField, Typography } from "@mui/material";
+import { Button, Card, CardActions, CardContent, Divider, Step, StepButton, Stepper, TextField, Typography } from "@mui/material";
 import { DuegevTextEditorUtil } from "./text-editor.helper";
 import getString from "../../util/language-server.util";
 import Post from "../post/post.component";
 import OptionSelectCustom from "../atomic-components/option-select/option-select.component";
+import DuegevTagManager, { ChipCollectionData } from "../atomic-components/tag-manager/tag-manager.component";
 
 
 export type TextEditorProps = {
@@ -41,6 +42,11 @@ const TextEditor = (props: TextEditorProps) => {
         }
     );
 
+    const [chipsCollection, setChipsCollection] = React.useState<ChipCollectionData>([
+        { label: 'tag', value: '1' },
+        { label: 'what do we have here', value: '2' },
+    ])
+
 
     /**
      * Step Button handlers - helpers are in the 
@@ -62,7 +68,8 @@ const TextEditor = (props: TextEditorProps) => {
             setCompleted(newCompleted);
             handlers.next();
         },
-        reset: () => { setActiveStep(0); setCompleted({}); }
+        reset: () => { setActiveStep(0); setCompleted({}); },
+        deleteChipFromCollection: (label: string, value: string) => { console.log(`delete ${label} from list with val of ${value}`) } /* TODO */
     }
 
     /**
@@ -161,8 +168,13 @@ const TextEditor = (props: TextEditorProps) => {
                     <TextField id="duegev-te-title-field" className="field" label="Francis" variant="outlined" disabled />
                     <TextField id="duegev-te-title-field" className="field" label="2024-06-15" variant="outlined" disabled />
                 </div>
+                <Divider></Divider>
                 <div id="duegev-label-selector-wrapper">
-                    <OptionSelectCustom options={[{value: '1', label: 'blin'}]} label={'Label Select'} helperText={'Label Select HT'}></OptionSelectCustom>
+                    <OptionSelectCustom options={[{ value: '1', label: 'blin' }]} label={'Label Select'}></OptionSelectCustom>
+                    <Button variant="outlined">Add Label</Button>
+                </div>
+                <div id="duegev-tag-manager-wrapper">
+                    <DuegevTagManager chipCollection={chipsCollection} deleteFromCollection={(label: string, value: string) => { handlers.deleteChipFromCollection(label, value) }}></DuegevTagManager>
                 </div>
             </div>
         );
