@@ -1,4 +1,4 @@
-import { Avatar, Card, CardActions, CardContent, CardHeader, CardMedia, IconButton, Typography } from "@mui/material"
+import { Avatar, Card, CardActions, CardContent, CardHeader, IconButton, Typography } from "@mui/material"
 import { red } from "@mui/material/colors"
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
