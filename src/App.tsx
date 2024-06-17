@@ -9,6 +9,7 @@ import RoutingService from './services/custom-routing.service';
 import LoginPage from './page/login.page';
 import PAGES from './enum/valid-page-locations.enum';
 import CreatePage from './page/creator.page';
+import MapPage from './page/map.page';
 
 function App() {
   const page: PAGES = RoutingService.getURLPath()[0] as PAGES;
@@ -32,6 +33,8 @@ function App() {
         return <LoginPage></LoginPage>;
       case PAGES.CREATE:
         return <CreatePage></CreatePage>;
+      case PAGES.MAP:
+        return <MapPage></MapPage>
 
       default:
         return <HomePage></HomePage>;

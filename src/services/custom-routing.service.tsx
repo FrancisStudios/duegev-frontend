@@ -35,19 +35,7 @@ class RoutingService {
     }
 
     public static navigate(page: PAGES) {
-        switch(page){
-            case PAGES.HOME:
-                window.location.pathname = '/home';
-                break;
-
-            case PAGES.LOGIN:
-                window.location.pathname = '/login';
-                break;
-
-            case PAGES.CREATE:
-                window.location.pathname = '/create';
-                break;
-        }
+        window.location.pathname = `/${page}`;
     }
 }
 

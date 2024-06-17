@@ -16,7 +16,9 @@ const NavbarDefaultMenu: Menu = {
         },
         {
             text: 'MAP',
-            action: () => { },
+            action: (e: React.MouseEvent<HTMLInputElement>) => {
+                navigate(PAGES.MAP, e);
+            },
         }
     ]
 }
@@ -38,7 +40,7 @@ const NavbarUserMenu: Menu = {
         {
             text: 'CREATE',
             isLoginRequired: true,
-            action: (e: React.MouseEvent<HTMLInputElement>) => { 
+            action: (e: React.MouseEvent<HTMLInputElement>) => {
                 navigate(PAGES.CREATE, e);
             },
         },
