@@ -6,6 +6,8 @@
     transform: translate(-50%, 0%);
     margin-top: 20px;
     max-height: 80%;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 #duegev-te-cc-wrapper {

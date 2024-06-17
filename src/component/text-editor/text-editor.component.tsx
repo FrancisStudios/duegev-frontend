@@ -159,6 +159,10 @@ const TextEditor = (props: TextEditorProps) => {
         }
     }
 
+    /**
+     * Steps for the create page
+     */
+
     const TextEditorMetadataForm = () => {
         return (
             <div id="metadata-editor-wrapper">
