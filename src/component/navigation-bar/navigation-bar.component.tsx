@@ -58,7 +58,7 @@ function NavigationBar() {
                 <p id="credits">
                     &copy; FrancisStudios - All intellectual and distribution rights reserved by author
                     <a href='https://github.com/francisstudios'> github.com/francisstudios</a> | Intellectual
-                    rights reserved for <b>Levente Vendéghegyi</b> under CC 4.0 License
+                    rights reserved for <b>Dynar Software by FSG</b> under CC 4.0 License
                 </p>
             </Box>
         )
