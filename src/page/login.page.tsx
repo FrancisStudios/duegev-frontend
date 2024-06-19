@@ -5,6 +5,7 @@ import getString from '../util/language-server.util';
 import { DuegevEncryptor } from '../util/encryptor.util';
 import { DUEGEV_CONSTANTS } from '../enum/constants.enum';
 import User from '../services/user-auth.service';
+import { UserAuthenticationResponse } from '../type/user-data.type';
 
 const LoginPage = () => {
 
@@ -14,7 +15,10 @@ const LoginPage = () => {
             (document.getElementById('duegev-password') as HTMLInputElement).value,
             DUEGEV_CONSTANTS.defaultLoginSalt
         );
-        User.attemptAuthentication(username, password); /* TODO: Returns a promise => handleResponse (auth success/fail) */
+        
+        User.attemptAuthentication(username, password).then((response: UserAuthenticationResponse)=>{
+            console.log(response);
+        });
     }
 
     return (
@@ -26,7 +30,7 @@ const LoginPage = () => {
                     </Typography>
                     <div id="duegev-login-form">
                         <TextField id="duegev-username" label={getString('USERNAME')} variant="outlined" />
-                        <TextField id="duegev-password" label={getString('PASSWORD')} variant="outlined" />
+                        <TextField id="duegev-password" label={getString('PASSWORD')} variant="outlined" type="password" />
                     </div>
                     <Divider />
                     <Typography variant="body2" id="duegev-login-disclaimer">

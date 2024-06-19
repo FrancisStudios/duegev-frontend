@@ -17,11 +17,18 @@ export type UserData = {
     privileges: Array<UserPrivileges>
 }
 
-
 export type UserAuthenticationResponse = {
     intent: DuegevAPIIntents,
     message: DuegevAPIResponseMessage,
-    data: UserData
+    data?: {    /* If failed, no UD */
+        user: UserData
+        session_token: SHA512String
+    }
+}
+
+export type UserAuthenticationQuery = {
+    intent: DuegevAPIIntents.AUTHENTICATE_USER,
+    query: AuthenticationKeys
 }
 
 export type LoginRequest = AuthenticationKeys;

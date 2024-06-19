@@ -12,3 +12,7 @@ export enum DuegevAPIResponseMessage {
     OK = 'ok', /* Query could be properly excuted */
     FAIL = 'fail' /* Invalid query */
 }
+
+export enum API_PATH {
+    AUTH = '/api/auth',
+}
