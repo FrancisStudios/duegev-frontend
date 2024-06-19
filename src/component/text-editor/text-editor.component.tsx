@@ -1,8 +1,8 @@
 import React from "react";
 import './text-editor.component.css';
-import { Box, border } from "@mui/system";
+import { Box } from "@mui/system";
 import { Article, ArticleLabels } from "../../type/article.type";
-import { Button, Card, CardActions, CardContent, Divider, Step, StepButton, Stepper, TextField, Typography } from "@mui/material";
+import { Button, Card, CardActions, CardContent, Step, StepButton, Stepper, TextField, Typography } from "@mui/material";
 import { DuegevTextEditorUtil } from "./text-editor.helper";
 import getString from "../../util/language-server.util";
 import Post from "../post/post.component";
