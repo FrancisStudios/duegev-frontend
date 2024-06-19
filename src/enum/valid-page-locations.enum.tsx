@@ -8,7 +8,8 @@ enum PAGES {
     HOME = 'home',
     LOGIN = 'login',
     CREATE = 'create',
-    MAP = 'map'
+    MAP = 'map',
+    SETTINGS = 'settings'
 }
 
 export default PAGES;

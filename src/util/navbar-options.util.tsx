@@ -52,7 +52,9 @@ const NavbarUserMenu: Menu = {
         {
             text: 'SETTINGS',
             isLoginRequired: true,
-            action: () => { },
+            action: (e: React.MouseEvent<HTMLInputElement>) => {
+                navigate(PAGES.SETTINGS, e);
+            },
         },
         {
             text: 'PRIVILEGES',
