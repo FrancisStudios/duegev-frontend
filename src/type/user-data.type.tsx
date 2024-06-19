@@ -8,6 +8,7 @@ export type AuthenticationKeys = {
 }
 
 export type UserData = {
+    uid: number
     auth: AuthenticationKeys,
     playerName: string,
     prefix: string,

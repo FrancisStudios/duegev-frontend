@@ -24,6 +24,7 @@ export class AuthenticationAPI {
                     intent: DuegevAPIIntents.AUTHENTICATE_USER,
                     message: DuegevAPIResponseMessage.OK,
                     data: {
+                        uid: 1,
                         auth: { username: 'francis', password: '$6$duegevlogin$cmVkuGVvOXquU9W2SF6HsXtHXAaYFJfCnii7zsGqzeGHdnWw4oAz/3/Xc51AcS8zxu5V0.nRDumOezymFrg7F0' },
                         playerName: 'Jehem',
                         prefix: 'Supreme Protector',
