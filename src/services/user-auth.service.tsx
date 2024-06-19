@@ -1,10 +1,13 @@
+import { SHA512String, UserAuthenticationResponse } from "../type/user-data.type";
+import { API } from "./API/API";
+
 /**
  * Local user management. Everything
  * related to logged in user control.
  */
 class User {
     private static instance: User;
-    public static readonly isLoggedIn: boolean = true;
+    public static readonly isLoggedIn: boolean = false;
 
     private constructor() { }
 
@@ -14,6 +17,11 @@ class User {
         }
         this.instance = new User();
         return this.instance;
+    }
+
+    public static attemptAuthentication(username: string, password: SHA512String): Promise<UserAuthenticationResponse> {
+        /*  Returns a promise */
+        return API.authenticate(username, password);
     }
 }
 

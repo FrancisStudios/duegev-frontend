@@ -6,7 +6,9 @@
  */
 
 import { ArticleQueryResponse } from "../../type/article.type";
+import { SHA512String, UserAuthenticationResponse } from "../../type/user-data.type";
 import { ArticleAPI } from "./article.api";
+import { AuthenticationAPI } from "./authentication.api";
 
 export class API {
     private static instance: API;
@@ -19,7 +21,11 @@ export class API {
             : new API();
     }
 
-    public static getNewsFeed(next: boolean = false) : Promise<ArticleQueryResponse> {
+    public static getNewsFeed(next: boolean = false): Promise<ArticleQueryResponse> {
         return ArticleAPI.fetchNewsFeed(next);
+    }
+
+    public static authenticate(username: string, password: SHA512String): Promise<UserAuthenticationResponse> {
+        return AuthenticationAPI.authenticateUser(username, password);
     }
 }
