@@ -1,4 +1,5 @@
 import { SHA512String, UserAuthenticationResponse } from "../type/user-data.type";
+import { DuegevEncryptor } from "../util/encryptor.util";
 import { API } from "./API/API";
 
 /**
@@ -7,7 +8,6 @@ import { API } from "./API/API";
  */
 class User {
     private static instance: User;
-    public static readonly isLoggedIn: boolean = false;
 
     private constructor() { }
 
@@ -20,7 +20,6 @@ class User {
     }
 
     public static attemptAuthentication(username: string, password: SHA512String): Promise<UserAuthenticationResponse> {
-        /*  Returns a promise */
         return API.authenticate(username, password);
     }
 }

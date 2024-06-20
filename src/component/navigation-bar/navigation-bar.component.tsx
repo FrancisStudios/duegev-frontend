@@ -10,12 +10,12 @@ import React from 'react';
 import { NavbarDefaultMenu, NavbarUserMenu } from '../../util/navbar-options.util';
 import getString from '../../util/language-server.util';
 import { LanguageModel } from '../../type/language.type';
-import User from '../../services/user-auth.service';
+import { UserDataStore } from '../../store/user-data.store';
 
 function NavigationBar() {
     const [open, setOpen] = React.useState(false);
 
-    const user: User = User.getInstance();
+    const UserManagement = UserDataStore.getInstance();
 
     const toggleDrawer = (newOpen: boolean) => () => {
         setOpen(newOpen);
@@ -30,7 +30,7 @@ function NavigationBar() {
                 <List>
                     {NavbarDefaultMenu.options.map((option, index) => (
                         <ListItem key={option.text} disablePadding>
-                            <ListItemButton onClick={e=>option.action(e)}>
+                            <ListItemButton onClick={e => option.action(e)}>
                                 <ListItemIcon>
                                 </ListItemIcon>
                                 <ListItemText primary={getString(option.text as keyof LanguageModel)} />
@@ -41,10 +41,10 @@ function NavigationBar() {
                 <Divider />
                 <List>
                     {NavbarUserMenu.options.map((options, index) => {
-                        if (User.isLoggedIn === options.isLoginRequired) {
+                        if (UserManagement.isLoggedIn === options.isLoginRequired) {
                             return (
                                 <ListItem key={options.text} disablePadding>
-                                    <ListItemButton onClick={e=>options.action(e)}>
+                                    <ListItemButton onClick={e => options.action(e)}>
                                         <ListItemIcon>
                                         </ListItemIcon>
                                         <ListItemText primary={getString(options.text as keyof LanguageModel)} />

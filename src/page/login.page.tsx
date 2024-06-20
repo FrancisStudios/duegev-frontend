@@ -6,8 +6,17 @@ import { DuegevEncryptor } from '../util/encryptor.util';
 import { DUEGEV_CONSTANTS } from '../enum/constants.enum';
 import User from '../services/user-auth.service';
 import { UserAuthenticationResponse } from '../type/user-data.type';
+import { DuegevAPIResponseMessage } from '../services/API/API.enum';
+import RoutingService from '../services/custom-routing.service';
+import PAGES from '../enum/valid-page-locations.enum';
+import { UserDataStore } from '../store/user-data.store';
 
 const LoginPage = () => {
+
+    const clearInputFields = () => {
+        (document.getElementById('duegev-username') as HTMLInputElement).value = '';
+        (document.getElementById('duegev-password') as HTMLInputElement).value = '';
+    }
 
     const BootstrapLogin = () => {
         const username: string = (document.getElementById('duegev-username') as HTMLInputElement).value;
@@ -15,10 +24,24 @@ const LoginPage = () => {
             (document.getElementById('duegev-password') as HTMLInputElement).value,
             DUEGEV_CONSTANTS.defaultLoginSalt
         );
-        
-        User.attemptAuthentication(username, password).then((response: UserAuthenticationResponse)=>{
-            console.log(response);
-        });
+
+        User
+            .attemptAuthentication(username, password)
+            .then((response: UserAuthenticationResponse) => {
+                console.log(response);
+                switch (response.message) {
+                    case DuegevAPIResponseMessage.OK:
+                        const userMgmt = UserDataStore.getInstance();
+                        userMgmt.loginNewUser(response);
+                        clearInputFields();
+                        RoutingService.navigate(PAGES.HOME);
+                        break;
+
+                    case DuegevAPIResponseMessage.FAIL:
+                        console.log('fail');
+                        break;
+                }
+            });
     }
 
     return (
