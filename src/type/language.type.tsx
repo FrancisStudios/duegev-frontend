@@ -21,7 +21,8 @@ type LanguageModel = {
     RESET: string,
     PUBLISH: string,
     FINISH_TE: string,
-    ALL_STEPS_COMPLETED_TE_MSG: string
+    ALL_STEPS_COMPLETED_TE_MSG: string,
+    UNSUCCESSFUL_LOGIN_MSG: string
 }
 
 enum ValidLanguages {

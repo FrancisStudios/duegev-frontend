@@ -30,7 +30,6 @@ const LoginPage = () => {
         User
             .attemptAuthentication(username, password)
             .then((response: UserAuthenticationResponse) => {
-                console.log(response);
                 switch (response.message) {
                     case DuegevAPIResponseMessage.OK:
                         const userMgmt = UserDataStore.getInstance();
@@ -40,7 +39,7 @@ const LoginPage = () => {
                         break;
 
                     case DuegevAPIResponseMessage.FAIL:
-                        console.log('fail');
+                        window.alert(getString('UNSUCCESSFUL_LOGIN_MSG'));
                         break;
                 }
             });
