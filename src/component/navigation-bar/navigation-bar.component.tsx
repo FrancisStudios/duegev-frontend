@@ -35,7 +35,7 @@ function NavigationBar() {
                 <h2 id='sidebar_branding'>DÛGEV WIKI</h2>
                 <Divider />
                 <List>
-                    {NavbarDefaultMenu.options.map((option, index) => (
+                    {NavbarDefaultMenu.options.map((option) => (
                         <ListItem key={option.text} disablePadding>
                             <ListItemButton onClick={() => handleNavigation(option.action)}>
                                 <ListItemIcon>
@@ -47,7 +47,7 @@ function NavigationBar() {
                 </List>
                 <Divider />
                 <List>
-                    {NavbarUserMenu.options.map((options, index) => {
+                    {NavbarUserMenu.options.map((options) => {
                         if (UserManagement.isLoggedIn === options.isLoginRequired) {
                             return (
                                 <ListItem key={options.text} disablePadding>

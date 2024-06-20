@@ -6,7 +6,7 @@ const lang_hu: LanguageModel = {
     MAP: 'Térkép',
     LOGIN: 'Bejelentkezés',
     LOGOUT: 'Kijelentkezés',
-    CREATE: 'Publikáció',
+    CREATE: 'Szerkesztő',
     ARTICLES: 'Cikkek',
     SETTINGS: 'Beállítások',
     PRIVILEGES: 'Privilégiumok',

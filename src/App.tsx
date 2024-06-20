@@ -31,6 +31,8 @@ function App() {
             <Route path={PAGES.CREATE} element={<CreatePage />} />
             <Route path={PAGES.MAP} element={<MapPage />} />
             <Route path={PAGES.SETTINGS} element={<UserSettingsPage />} />
+            <Route path='*' element={<HomePage />} />
+            <Route path='/' element={<HomePage />} />
           </Routes>
         </div>
       </BrowserRouter>

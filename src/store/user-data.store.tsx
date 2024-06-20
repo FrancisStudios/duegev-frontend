@@ -55,8 +55,8 @@ export class UserDataStore {
     }
 
     checkIfLoggedIn(): boolean {
-        const user = JSON.parse(localStorage.getItem(DUEGEV_CONSTANTS.duegevUserItemKey) as string);
-        if (user?.username && user?.playerName && user?.uid) {
+        const user: UserData = JSON.parse(localStorage.getItem(DUEGEV_CONSTANTS.duegevUserItemKey) as string);
+        if (user?.auth?.username && user?.playerName && user?.uid) {
             this.isUserLoggedIn = true;
             this.userData = user;
             return true;
