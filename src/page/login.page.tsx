@@ -7,11 +7,13 @@ import { DUEGEV_CONSTANTS } from '../enum/constants.enum';
 import User from '../services/user-auth.service';
 import { UserAuthenticationResponse } from '../type/user-data.type';
 import { DuegevAPIResponseMessage } from '../services/API/API.enum';
-import RoutingService from '../services/custom-routing.service';
 import PAGES from '../enum/valid-page-locations.enum';
 import { UserDataStore } from '../store/user-data.store';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
+
+    const navigate = useNavigate();
 
     const clearInputFields = () => {
         (document.getElementById('duegev-username') as HTMLInputElement).value = '';
@@ -34,7 +36,7 @@ const LoginPage = () => {
                         const userMgmt = UserDataStore.getInstance();
                         userMgmt.loginNewUser(response);
                         clearInputFields();
-                        RoutingService.navigate(PAGES.HOME);
+                        navigate(`/${PAGES.HOME}`);
                         break;
 
                     case DuegevAPIResponseMessage.FAIL:

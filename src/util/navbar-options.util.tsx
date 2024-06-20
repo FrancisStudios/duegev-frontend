@@ -1,24 +1,19 @@
 import PAGES from "../enum/valid-page-locations.enum"
-import RoutingService from "../services/custom-routing.service"
 import { Menu } from "../type/menu-item.type"
 
 const NavbarDefaultMenu: Menu = {
     options: [
         {
             text: 'HOME',
-            action: (e: React.MouseEvent<HTMLInputElement>) => {
-                navigate(PAGES.HOME, e);
-            },
+            action: PAGES.HOME
         },
         {
             text: 'SEARCH',
-            action: () => { },
+            action: PAGES.HOME,
         },
         {
             text: 'MAP',
-            action: (e: React.MouseEvent<HTMLInputElement>) => {
-                navigate(PAGES.MAP, e);
-            },
+            action: PAGES.MAP,
         }
     ]
 }
@@ -28,46 +23,34 @@ const NavbarUserMenu: Menu = {
         {
             text: 'LOGIN',
             isLoginRequired: false,
-            action: (e: React.MouseEvent<HTMLInputElement>) => {
-                navigate(PAGES.LOGIN, e);
-            },
+            action: PAGES.LOGIN,
         },
         {
             text: 'LOGOUT',
             isLoginRequired: true,
-            action: () => { },
+            action: PAGES.HOME,
         },
         {
             text: 'CREATE',
             isLoginRequired: true,
-            action: (e: React.MouseEvent<HTMLInputElement>) => {
-                navigate(PAGES.CREATE, e);
-            },
+            action: PAGES.CREATE,
         },
         {
             text: 'ARTICLES',
             isLoginRequired: true,
-            action: () => { },
+            action: PAGES.HOME,
         },
         {
             text: 'SETTINGS',
             isLoginRequired: true,
-            action: (e: React.MouseEvent<HTMLInputElement>) => {
-                navigate(PAGES.SETTINGS, e);
-            },
+            action: PAGES.SETTINGS,
         },
         {
             text: 'PRIVILEGES',
             isLoginRequired: true,
-            action: () => { },
+            action: PAGES.HOME,
         }
     ]
-}
-
-const navigate = (page: PAGES, e: React.MouseEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    RoutingService.navigate(page);
 }
 
 export {

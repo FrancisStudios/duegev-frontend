@@ -1,3 +1,5 @@
 export enum DUEGEV_CONSTANTS {
-    defaultLoginSalt = 'duegevlogin'
+    defaultLoginSalt = 'duegevlogin',
+    duegevUserItemKey= 'duegev_user',
+    fail = 'fail'
 }

@@ -11,9 +11,13 @@ import { NavbarDefaultMenu, NavbarUserMenu } from '../../util/navbar-options.uti
 import getString from '../../util/language-server.util';
 import { LanguageModel } from '../../type/language.type';
 import { UserDataStore } from '../../store/user-data.store';
+import PAGES from '../../enum/valid-page-locations.enum';
+import { useNavigate } from 'react-router-dom';
 
 function NavigationBar() {
     const [open, setOpen] = React.useState(false);
+    
+    const navigate = useNavigate();
 
     const UserManagement = UserDataStore.getInstance();
 
@@ -21,6 +25,9 @@ function NavigationBar() {
         setOpen(newOpen);
     };
 
+    const handleNavigation = (navigationPath: PAGES) => {
+        navigate(`/${navigationPath}`);
+    }
 
     const DrawerContents = () => {
         return (
@@ -30,7 +37,7 @@ function NavigationBar() {
                 <List>
                     {NavbarDefaultMenu.options.map((option, index) => (
                         <ListItem key={option.text} disablePadding>
-                            <ListItemButton onClick={e => option.action(e)}>
+                            <ListItemButton onClick={() => handleNavigation(option.action)}>
                                 <ListItemIcon>
                                 </ListItemIcon>
                                 <ListItemText primary={getString(option.text as keyof LanguageModel)} />
@@ -44,7 +51,7 @@ function NavigationBar() {
                         if (UserManagement.isLoggedIn === options.isLoginRequired) {
                             return (
                                 <ListItem key={options.text} disablePadding>
-                                    <ListItemButton onClick={e => options.action(e)}>
+                                    <ListItemButton onClick={() => handleNavigation(options.action)}>
                                         <ListItemIcon>
                                         </ListItemIcon>
                                         <ListItemText primary={getString(options.text as keyof LanguageModel)} />
