@@ -38,7 +38,7 @@ const NavbarUserMenu: Menu = {
         {
             text: 'ARTICLES',
             isLoginRequired: true,
-            action: PAGES.HOME,
+            action: PAGES.ARTICLES,
         },
         {
             text: 'SETTINGS',
@@ -48,7 +48,7 @@ const NavbarUserMenu: Menu = {
         {
             text: 'PRIVILEGES',
             isLoginRequired: true,
-            action: PAGES.HOME,
+            action: PAGES.PRIVILEGES,
         }
     ]
 }

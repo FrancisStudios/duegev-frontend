@@ -9,7 +9,7 @@ export class UserDataStore {
     private static instance: UserDataStore;
 
 
-    /* Singleton Pattern Class as Store */
+    /* Singleton Class as Store */
     static getInstance() {
         if (this.instance) {
             return this.instance;
@@ -40,6 +40,10 @@ export class UserDataStore {
 
     logOutUser() {
         localStorage.clear();
+    }
+
+    get getLocalUser(): UserData {
+        return JSON.parse(localStorage.getItem(DUEGEV_CONSTANTS.duegevUserItemKey) as string);
     }
 
     get getSessionToken(): (string | 'fail') {

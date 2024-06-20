@@ -12,6 +12,7 @@ import MapPage from './page/map.page';
 import UserSettingsPage from './page/settings.page';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { UserDataStore } from './store/user-data.store';
+import UserPrivilegesPage from './page/privileges.page';
 
 function App() {
   const customTheme = getCustomTheme();
@@ -28,9 +29,10 @@ function App() {
           <Routes>
             <Route path={PAGES.HOME} element={<HomePage />} />
             <Route path={PAGES.LOGIN} element={<LoginPage />} />
-            <Route path={PAGES.CREATE} element={<CreatePage />} />
             <Route path={PAGES.MAP} element={<MapPage />} />
-            <Route path={PAGES.SETTINGS} element={<UserSettingsPage />} />
+            <Route path={PAGES.CREATE} element={UserManagement.isLoggedIn ? <CreatePage /> : <HomePage />} />
+            <Route path={PAGES.SETTINGS} element={UserManagement.isLoggedIn ? <UserSettingsPage /> : <HomePage />} />
+            <Route path={PAGES.PRIVILEGES} element={UserManagement.isLoggedIn ? <UserPrivilegesPage /> : <HomePage />} />
             <Route path='*' element={<HomePage />} />
             <Route path='/' element={<HomePage />} />
           </Routes>

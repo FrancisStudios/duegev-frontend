@@ -24,7 +24,13 @@ const lang_hu: LanguageModel = {
     PUBLISH: 'Megosztás',
     FINISH_TE: 'Minden Kész',
     ALL_STEPS_COMPLETED_TE_MSG: 'Minden lépés készen áll, most már megoszthatod a cikkedet!',
-    UNSUCCESSFUL_LOGIN_MSG: 'A bejelentkezés sikertelen volt! Ellenőrizd a belépési adataidat, vagy vedd fel a kapcsolatot a webmesterrel!'
+    UNSUCCESSFUL_LOGIN_MSG: 'A bejelentkezés sikertelen volt! Ellenőrizd a belépési adataidat, vagy vedd fel a kapcsolatot a webmesterrel!',
+    SAVE: 'Mentés',
+    CHANGE: 'Megváltoztat',
+    PREFIX: 'Prefixum',
+    PLAYER_NAME: 'Játékosnév',
+    LANGUAGE: 'Nyelv',
+    UPLOAD_PROFILE_IMG: 'Profilkép feltöltése'
 }
 
 export default lang_hu;

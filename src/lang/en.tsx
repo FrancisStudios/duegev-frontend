@@ -24,7 +24,13 @@ const lang_en: LanguageModel = {
     PUBLISH: 'Publish',
     FINISH_TE: 'Finish Article',
     ALL_STEPS_COMPLETED_TE_MSG: 'All steps completed, now you can publish your article!',
-    UNSUCCESSFUL_LOGIN_MSG: 'Login failed! Check your credentials, or contact webmaster!'
+    UNSUCCESSFUL_LOGIN_MSG: 'Login failed! Check your credentials, or contact webmaster!',
+    SAVE: 'Save',
+    CHANGE: 'Change',
+    PREFIX: 'Prefix',
+    PLAYER_NAME: 'Player name',
+    LANGUAGE: 'Language',
+    UPLOAD_PROFILE_IMG: 'Upload profile image'
 }
 
 export default lang_en;

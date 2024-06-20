@@ -9,7 +9,9 @@ enum PAGES {
     LOGIN = 'login',
     CREATE = 'create',
     MAP = 'map',
-    SETTINGS = 'settings'
+    SETTINGS = 'settings',
+    PRIVILEGES = 'privileges',
+    ARTICLES = 'articles'
 }
 
 export default PAGES;

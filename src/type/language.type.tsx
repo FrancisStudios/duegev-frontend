@@ -1,4 +1,4 @@
-type LanguageModel = {
+export type LanguageModel = {
     HOME: string,
     SEARCH: string,
     MAP: string,
@@ -22,16 +22,17 @@ type LanguageModel = {
     PUBLISH: string,
     FINISH_TE: string,
     ALL_STEPS_COMPLETED_TE_MSG: string,
-    UNSUCCESSFUL_LOGIN_MSG: string
+    UNSUCCESSFUL_LOGIN_MSG: string,
+    SAVE: string,
+    CHANGE: string,
+    PREFIX: string,
+    PLAYER_NAME: string,
+    LANGUAGE: string,
+    UPLOAD_PROFILE_IMG: string
 }
 
-enum ValidLanguages {
+export enum ValidLanguages {
     DYNARI = 'dn',
     ENGLISH = 'en',
     HUNGARIAN = 'hu',
-}
-
-export type {
-    LanguageModel,
-    ValidLanguages
 }
