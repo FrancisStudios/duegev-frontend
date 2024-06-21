@@ -13,6 +13,7 @@ import OptionSelectCustom, { OptionSelectCustomOption } from '../component/atomi
 import { ValidLanguages } from '../type/language.type';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import TagList from '../component/atomic-components/tag-list/tag-list.component';
 
 const UserSettingsPage = () => {
 
@@ -44,7 +45,6 @@ const UserSettingsPage = () => {
     }
 
     const userSettingsForm = () => {
-        console.log(availabeLanguages);
         return (
             <>
                 <div className="row">
@@ -85,6 +85,9 @@ const UserSettingsPage = () => {
                         defaultValue={userManagement.getLocalUser.language}
                     />
                 </div>
+                <div className="row">
+                    <TagList chips={userManagement.getLocalUser.privileges as Array<string>}></TagList>
+                </div>
             </>
         );
     }
@@ -102,11 +105,9 @@ const UserSettingsPage = () => {
                     <Typography sx={{ mb: 1.5, fontSize: 11 }} color="text.secondary">
                         by Dynar Software Inc.
                     </Typography>
-                    <Typography variant="body2">
-                        <div id="user-settings-form-wrapper">
-                            {userSettingsForm()}
-                        </div>
-                    </Typography>
+                    <div id="user-settings-form-wrapper">
+                        {userSettingsForm()}
+                    </div>
                 </CardContent>
                 <CardActions id="settings-card-actions">
                     <Button size="small">{getString('SAVE')}</Button>
