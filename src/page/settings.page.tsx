@@ -15,17 +15,25 @@ import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import TagList from '../component/atomic-components/tag-list/tag-list.component';
 import { DUEGEV_CONSTANTS } from '../enum/constants.enum';
+import { UserData } from '../type/user-data.type';
 
 const UserSettingsPage = () => {
 
     const userManagement = UserDataStore.getInstance();
     const availabeLanguages: Array<OptionSelectCustomOption> = Object.values(ValidLanguages).map((value) => ({ label: value, value: value }));
-
-    /*
-    TODO: kövessem a változtatásokat egy arrayban és a mentés gomb az alapján fog bármit is csinálni
-    ha a változtatásokat már egy másik service megcsinálta PL username&&password / profileIMG akkor
-    nem kell hogy bármit is elmentsen
-    */
+    const comparatoryUser: UserData = userManagement.getLocalUser;
+    const NewUserDataConstruct: UserData = {
+        uid: userManagement.getLocalUser.uid,
+        auth: {
+            username: userManagement.getLocalUser.auth.username,
+            password: userManagement.getLocalUser.auth.password
+        },
+        playerName: userManagement.getLocalUser.playerName,
+        prefix: userManagement.getLocalUser.prefix,
+        language: userManagement.getLocalUser.language,
+        profileImg: userManagement.getLocalUser.profileImg,
+        privileges: userManagement.getLocalUser.privileges
+    }
 
     const VisuallyHiddenInput = styled('input')({
         clip: 'rect(0 0 0 0)',
@@ -47,14 +55,13 @@ const UserSettingsPage = () => {
 
     /* MANAGE & STORE SETTINGS CHANGES*/
     const SETTINGS_FORM_MANAGER = {
+
         avatarUpload: () => {
             const fileUploader: any = (document.getElementById('avatar-file-upload'));
             const fileName = fileUploader.files[0].name ?? DUEGEV_CONSTANTS.invalid;
             const file = fileUploader.files[0];
             const validFile: boolean = (fileName && fileName !== DUEGEV_CONSTANTS.invalid && fileName.length > 1);
             const _fileReader = new FileReader();
-
-            console.log(file)
 
             if (validFile) {
                 const _fileReference = new File(
@@ -63,21 +70,30 @@ const UserSettingsPage = () => {
                     { type: file.type }
                 );
 
-
                 _fileReader.readAsDataURL(_fileReference)
                 _fileReader.addEventListener('load', () => {
                     const _result = _fileReader.result?.toString() ?? '';
                     const _regex = /^data:.+\/(.+);base64,(.*)$/;
-
-                    let fileRegexMatches = _result.match(_regex);
-
-
-                    if(_regex.test(_result)){
-                        console.log(_result)
+                    if (_regex.test(_result)) {
+                        NewUserDataConstruct.profileImg = _result;
                     }
                 });
             }
-        }
+        },
+
+        changePlayernameOrPrefix: (target: DUEGEV_CONSTANTS.playername | DUEGEV_CONSTANTS.prefix) => {
+            switch (target) {
+                case DUEGEV_CONSTANTS.playername:
+                    NewUserDataConstruct.playerName = ((document.getElementById('settings-playername') as HTMLInputElement).value as string) ?? '';
+                    break;
+
+                case DUEGEV_CONSTANTS.prefix:
+                    NewUserDataConstruct.prefix = ((document.getElementById('settings-prefix') as HTMLInputElement).value as string) ?? '';
+                    break;
+            } console.log(NewUserDataConstruct)
+        },
+
+        changeLanguage: (e: PointerEvent) => { NewUserDataConstruct.language = (e.target as HTMLSelectElement)?.value as ValidLanguages; }
     }
 
     const userSettingsForm = () => {
@@ -114,16 +130,19 @@ const UserSettingsPage = () => {
                         id="settings-prefix"
                         label={getString('PREFIX')}
                         defaultValue={userManagement.getLocalUser.prefix}
+                        onChange={() => { SETTINGS_FORM_MANAGER.changePlayernameOrPrefix(DUEGEV_CONSTANTS.prefix) }}
                     />
                     <TextField
                         id="settings-playername"
                         label={getString('PLAYER_NAME')}
                         defaultValue={userManagement.getLocalUser.playerName}
+                        onChange={() => { SETTINGS_FORM_MANAGER.changePlayernameOrPrefix(DUEGEV_CONSTANTS.playername) }}
                     />
                     <OptionSelectCustom
                         options={availabeLanguages}
                         label={getString('LANGUAGE') as string}
                         defaultValue={userManagement.getLocalUser.language}
+                        onSelect={(e: PointerEvent) => { SETTINGS_FORM_MANAGER.changeLanguage(e) }}
                     />
                 </div>
                 <div className="row">

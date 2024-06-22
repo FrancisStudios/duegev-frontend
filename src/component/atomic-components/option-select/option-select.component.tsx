@@ -7,7 +7,8 @@ export type OptionSelectCustomProps = {
     label: string,
     helperText?: string,
     defaultValue?: string,
-    id?: string
+    id?: string,
+    onSelect?: CallableFunction
 }
 
 export type OptionSelectCustomOption = {
@@ -32,6 +33,7 @@ export default function OptionSelectCustom(props: OptionSelectCustomProps) {
                     label={props.label}
                     defaultValue={props.defaultValue}
                     helperText={props.helperText}
+                    onChange={(e) => { if (props.onSelect) props.onSelect(e) }}
                 >
                     {props.options.map((option) => (
                         <MenuItem key={option.value} value={option.value}>
