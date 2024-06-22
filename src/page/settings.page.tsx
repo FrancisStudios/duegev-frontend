@@ -14,6 +14,7 @@ import { ValidLanguages } from '../type/language.type';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import TagList from '../component/atomic-components/tag-list/tag-list.component';
+import { DUEGEV_CONSTANTS } from '../enum/constants.enum';
 
 const UserSettingsPage = () => {
 
@@ -44,6 +45,41 @@ const UserSettingsPage = () => {
             : (<Fab color="primary" aria-label="add"><ManageAccountsIcon /></Fab>);// Placeholder for real avatar TODO: real avatar from base64
     }
 
+    /* MANAGE & STORE SETTINGS CHANGES*/
+    const SETTINGS_FORM_MANAGER = {
+        avatarUpload: () => {
+            const fileUploader: any = (document.getElementById('avatar-file-upload'));
+            const fileName = fileUploader.files[0].name ?? DUEGEV_CONSTANTS.invalid;
+            const file = fileUploader.files[0];
+            const validFile: boolean = (fileName && fileName !== DUEGEV_CONSTANTS.invalid && fileName.length > 1);
+            const _fileReader = new FileReader();
+
+            console.log(file)
+
+            if (validFile) {
+                const _fileReference = new File(
+                    [file],
+                    `${userManagement.getLocalUser.playerName}-avatar`,
+                    { type: file.type }
+                );
+
+
+                _fileReader.readAsDataURL(_fileReference)
+                _fileReader.addEventListener('load', () => {
+                    const _result = _fileReader.result?.toString() ?? '';
+                    const _regex = /^data:.+\/(.+);base64,(.*)$/;
+
+                    let fileRegexMatches = _result.match(_regex);
+
+
+                    if(_regex.test(_result)){
+                        console.log(_result)
+                    }
+                });
+            }
+        }
+    }
+
     const userSettingsForm = () => {
         return (
             <>
@@ -58,7 +94,12 @@ const UserSettingsPage = () => {
                         startIcon={<CloudUploadIcon />}
                     >
                         {getString('UPLOAD_PROFILE_IMG') as string}
-                        <VisuallyHiddenInput type="file" />
+                        <VisuallyHiddenInput
+                            type="file"
+                            accept="image/.jpg, .jpeg, .png"
+                            onChange={SETTINGS_FORM_MANAGER.avatarUpload}
+                            id="avatar-file-upload"
+                        />
                     </Button>
                 </div>
                 <div className="row">

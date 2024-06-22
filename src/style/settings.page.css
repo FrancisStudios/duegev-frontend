@@ -32,3 +32,9 @@
     overflow-y: auto;
     max-height: 500px;
 }
+
+@media screen and (max-height: 800px) {
+    #user-settings-form-wrapper {
+        max-height: 350px !important;
+    }
+}
