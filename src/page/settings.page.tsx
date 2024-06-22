@@ -5,7 +5,7 @@
  * should be set on this level
  */
 import '../style/settings.page.css';
-import { Button, Card, CardActions, CardContent, Fab, TextField, Typography } from "@mui/material";
+import { Avatar, Button, Card, CardActions, CardContent, Fab, TextField, Typography } from "@mui/material";
 import getString from '../util/language-server.util';
 import { styled } from '@mui/material/styles';
 import { UserDataStore } from '../store/user-data.store';
@@ -16,12 +16,15 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import TagList from '../component/atomic-components/tag-list/tag-list.component';
 import { DUEGEV_CONSTANTS } from '../enum/constants.enum';
 import { UserData } from '../type/user-data.type';
+import React from 'react';
 
 const UserSettingsPage = () => {
 
     const userManagement = UserDataStore.getInstance();
     const availabeLanguages: Array<OptionSelectCustomOption> = Object.values(ValidLanguages).map((value) => ({ label: value, value: value }));
     const comparatoryUser: UserData = userManagement.getLocalUser;
+    const [userAvatar, setUserAvatar] = React.useState(userManagement.getLocalUser.profileImg);
+
     const NewUserDataConstruct: UserData = {
         uid: userManagement.getLocalUser.uid,
         auth: {
@@ -48,9 +51,9 @@ const UserSettingsPage = () => {
     });
 
     const avatar = () => {
-        return userManagement.getLocalUser.profileImg.length < 50
+        return userAvatar.length < 50
             ? (<Fab color="primary" aria-label="add" disabled><ManageAccountsIcon /></Fab>)
-            : (<Fab color="primary" aria-label="add"><ManageAccountsIcon /></Fab>);// Placeholder for real avatar TODO: real avatar from base64
+            : <Avatar alt="Duegev Profile Picture" src={userAvatar} sx={{ width: 56, height: 56 }} />
     }
 
     /* MANAGE & STORE SETTINGS CHANGES*/
@@ -76,6 +79,7 @@ const UserSettingsPage = () => {
                     const _regex = /^data:.+\/(.+);base64,(.*)$/;
                     if (_regex.test(_result)) {
                         NewUserDataConstruct.profileImg = _result;
+                        setUserAvatar(_result); // 4 the re-render
                     }
                 });
             }
@@ -90,7 +94,7 @@ const UserSettingsPage = () => {
                 case DUEGEV_CONSTANTS.prefix:
                     NewUserDataConstruct.prefix = ((document.getElementById('settings-prefix') as HTMLInputElement).value as string) ?? '';
                     break;
-            } console.log(NewUserDataConstruct)
+            }
         },
 
         changeLanguage: (e: PointerEvent) => { NewUserDataConstruct.language = (e.target as HTMLSelectElement)?.value as ValidLanguages; }
