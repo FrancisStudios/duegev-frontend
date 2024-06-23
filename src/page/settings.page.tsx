@@ -17,6 +17,7 @@ import TagList from '../component/atomic-components/tag-list/tag-list.component'
 import { DUEGEV_CONSTANTS } from '../enum/constants.enum';
 import { UserData } from '../type/user-data.type';
 import React from 'react';
+import SlideInDialog from '../component/atomic-components/slide-in-dialog/slide-in-dialog.component';
 
 const UserSettingsPage = () => {
 
@@ -24,6 +25,7 @@ const UserSettingsPage = () => {
     const availabeLanguages: Array<OptionSelectCustomOption> = Object.values(ValidLanguages).map((value) => ({ label: value, value: value }));
     const comparatoryUser: UserData = userManagement.getLocalUser;
     const [userAvatar, setUserAvatar] = React.useState(userManagement.getLocalUser.profileImg);
+    const [openDiffConfirmDialog, setOpenDiffConfirmDialog] = React.useState(false);
 
     const NewUserDataConstruct: UserData = {
         uid: userManagement.getLocalUser.uid,
@@ -123,11 +125,8 @@ const UserSettingsPage = () => {
                     </Button>
                 </div>
                 <div className="row">
-                    <TextField id="settings-username" label={getString('USERNAME')} variant="outlined" defaultValue={userManagement.getLocalUser.auth.username} disabled />
-                    <TextField id="settings-password" label={getString('PASSWORD')} variant="outlined" type="password" defaultValue={userManagement.getLocalUser.auth.password} disabled />
-                    <Button variant="contained" size="large">
-                        {getString('CHANGE')}
-                    </Button>
+                    <TextField id="settings-username" label={getString('USERNAME')} variant="outlined" defaultValue={userManagement.getLocalUser.auth.username} />
+                    <TextField id="settings-password" label={getString('PASSWORD')} variant="outlined" type="password" defaultValue={userManagement.getLocalUser.auth.password} />
                 </div>
                 <div className="row">
                     <TextField
@@ -158,6 +157,10 @@ const UserSettingsPage = () => {
 
     return (
         <div id="settings-card-wrapper">
+            <SlideInDialog
+                open={openDiffConfirmDialog}
+                close={() => { setOpenDiffConfirmDialog(false) }}
+            />
             <Card id="settings-card">
                 <CardContent>
                     <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
@@ -174,7 +177,7 @@ const UserSettingsPage = () => {
                     </div>
                 </CardContent>
                 <CardActions id="settings-card-actions">
-                    <Button size="small">{getString('SAVE')}</Button>
+                    <Button size="small" onClick={() => setOpenDiffConfirmDialog(true)}>{getString('SAVE')}</Button>
                 </CardActions>
             </Card>
         </div>
