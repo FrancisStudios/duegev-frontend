@@ -79,7 +79,7 @@ const UserSettingsPage = () => {
                     const _regex = /^data:.+\/(.+);base64,(.*)$/;
                     if (_regex.test(_result)) {
                         NewUserDataConstruct.profileImg = _result;
-                        setUserAvatar(_result); // 4 the re-render
+                        setUserAvatar(_result);
                     }
                 });
             }
