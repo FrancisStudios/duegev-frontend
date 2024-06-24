@@ -24,7 +24,7 @@ export type SlideInDialogProps = {
     open: boolean,
     close: CallableFunction,
     title: string
-    content?: React.ReactElement,
+    content: React.ReactElement,
     save?: CallableFunction,
     exit?: CallableFunction
 };
@@ -47,10 +47,7 @@ const SlideInDialog = (props: SlideInDialogProps) => {
             >
                 <DialogTitle>{props.title}</DialogTitle>
                 <DialogContent>
-                    <DialogContentText id="alert-dialog-slide-description">
-                        Let Google help apps determine location. This means sending anonymous
-                        location data to Google, even when no apps are running.
-                    </DialogContentText>
+                    {props.content}
                 </DialogContent>
                 <DialogActions>
                     <Button

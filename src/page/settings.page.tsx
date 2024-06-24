@@ -52,12 +52,6 @@ const UserSettingsPage = () => {
         width: 1,
     });
 
-    const avatar = () => {
-        return userAvatar.length < 50
-            ? (<Fab color="primary" aria-label="add" disabled><ManageAccountsIcon /></Fab>)
-            : <Avatar alt="Duegev Profile Picture" src={userAvatar} sx={{ width: 56, height: 56 }} />
-    }
-
     /* MANAGE & STORE SETTINGS CHANGES*/
     const SETTINGS_FORM_MANAGER = {
 
@@ -100,6 +94,12 @@ const UserSettingsPage = () => {
         },
 
         changeLanguage: (e: PointerEvent) => { NewUserDataConstruct.language = (e.target as HTMLSelectElement)?.value as ValidLanguages; }
+    }
+
+    const avatar = () => {
+        return userAvatar.length < 50
+            ? (<Fab color="primary" aria-label="add" disabled><ManageAccountsIcon /></Fab>)
+            : <Avatar alt="Duegev Profile Picture" src={userAvatar} sx={{ width: 56, height: 56 }} />
     }
 
     const userSettingsForm = () => {
@@ -155,12 +155,21 @@ const UserSettingsPage = () => {
         );
     }
 
+    const ConfirmationDialogContent = () => {
+        return(
+            <p>
+                Hello world
+            </p>
+        );
+    }
+
     return (
         <div id="settings-card-wrapper">
             <SlideInDialog
                 title={getString('DO_YOU_WANT_TO_CHANGE_USER_DATA') as string}
                 open={openDiffConfirmDialog}
                 close={() => { setOpenDiffConfirmDialog(false) }}
+                content={ConfirmationDialogContent()}
             />
             <Card id="settings-card">
                 <CardContent>
