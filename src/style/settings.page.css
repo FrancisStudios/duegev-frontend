@@ -33,6 +33,18 @@
     max-height: 500px;
 }
 
+#confirmation-dialog-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#confirm-password {
+    display: flex;
+    direction: row;
+    gap: 10px;
+}
+
 @media screen and (max-height: 800px) {
     #user-settings-form-wrapper {
         max-height: 350px !important;

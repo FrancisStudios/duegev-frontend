@@ -1,8 +1,10 @@
 export enum DUEGEV_CONSTANTS {
     defaultLoginSalt = 'duegevlogin',
-    duegevUserItemKey= 'duegev_user',
+    duegevUserItemKey = 'duegev_user',
     fail = 'fail',
     invalid = 'invalid',
     playername = 'playername',
-    prefix = 'prefix'
+    prefix = 'prefix',
+    username = 'username',
+    password = 'password'
 }

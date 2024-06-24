@@ -5,7 +5,7 @@
  * should be set on this level
  */
 import '../style/settings.page.css';
-import { Avatar, Button, Card, CardActions, CardContent, Fab, TextField, Typography } from "@mui/material";
+import { Avatar, Button, Card, CardActions, CardContent, Fab, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from "@mui/material";
 import getString from '../util/language-server.util';
 import { styled } from '@mui/material/styles';
 import { UserDataStore } from '../store/user-data.store';
@@ -18,26 +18,35 @@ import { DUEGEV_CONSTANTS } from '../enum/constants.enum';
 import { UserData } from '../type/user-data.type';
 import React from 'react';
 import SlideInDialog from '../component/atomic-components/slide-in-dialog/slide-in-dialog.component';
+import GroupIcon from '@mui/icons-material/Group';
 
 const UserSettingsPage = () => {
 
     const userManagement = UserDataStore.getInstance();
     const availabeLanguages: Array<OptionSelectCustomOption> = Object.values(ValidLanguages).map((value) => ({ label: value, value: value }));
-    const comparatoryUser: UserData = userManagement.getLocalUser;
     const [userAvatar, setUserAvatar] = React.useState(userManagement.getLocalUser.profileImg);
     const [openDiffConfirmDialog, setOpenDiffConfirmDialog] = React.useState(false);
+    const [NewUserDataConstruct, setNewUserDataConstruct] = React.useState<UserData>(
+        {
+            uid: userManagement.getLocalUser.uid,
+            auth: {
+                username: userManagement.getLocalUser.auth.username,
+                password: userManagement.getLocalUser.auth.password
+            },
+            playerName: userManagement.getLocalUser.playerName,
+            prefix: userManagement.getLocalUser.prefix,
+            language: userManagement.getLocalUser.language,
+            profileImg: userManagement.getLocalUser.profileImg,
+            privileges: userManagement.getLocalUser.privileges
+        }
+    );
 
-    const NewUserDataConstruct: UserData = {
-        uid: userManagement.getLocalUser.uid,
-        auth: {
-            username: userManagement.getLocalUser.auth.username,
-            password: userManagement.getLocalUser.auth.password
-        },
-        playerName: userManagement.getLocalUser.playerName,
-        prefix: userManagement.getLocalUser.prefix,
-        language: userManagement.getLocalUser.language,
-        profileImg: userManagement.getLocalUser.profileImg,
-        privileges: userManagement.getLocalUser.privileges
+    let UserDataChanges: Array<UserDataChangeManifestMark> = [];
+
+    type UserDataChangeManifestMark = {
+        name: string,
+        oldValue: string,
+        newValue: string
     }
 
     const VisuallyHiddenInput = styled('input')({
@@ -93,7 +102,70 @@ const UserSettingsPage = () => {
             }
         },
 
-        changeLanguage: (e: PointerEvent) => { NewUserDataConstruct.language = (e.target as HTMLSelectElement)?.value as ValidLanguages; }
+        changeLanguage: (e: PointerEvent) => { NewUserDataConstruct.language = (e.target as HTMLSelectElement)?.value as ValidLanguages; },
+
+        changeUsernameOrPassword(target: DUEGEV_CONSTANTS.username | DUEGEV_CONSTANTS.password) {
+            switch (target) {
+                case DUEGEV_CONSTANTS.username:
+                    NewUserDataConstruct.auth.username = ((document.getElementById('settings-username') as HTMLInputElement).value as string) ?? '';
+                    break;
+
+                case DUEGEV_CONSTANTS.password:
+                    NewUserDataConstruct.auth.password = ((document.getElementById('settings-password') as HTMLInputElement).value as string) ?? '';
+                    break;
+            }
+        }
+    }
+
+    const detectUserDataChanges = () => {
+        /* USERNAME */
+        if (userManagement.getLocalUser.auth.username !== NewUserDataConstruct.auth.username) UserDataChanges.push(
+            {
+                name: getString('USERNAME') as string,
+                oldValue: userManagement.getLocalUser.auth.username,
+                newValue: '********'
+            }
+        );
+        /* PASSWORD */
+        if (userManagement.getLocalUser.auth.password !== NewUserDataConstruct.auth.password) UserDataChanges.push(
+            {
+                name: getString('PASSWORD') as string,
+                oldValue: userManagement.getLocalUser.auth.password,
+                newValue: '********'
+            }
+        );
+        /* PLAYER NAME */
+        if (userManagement.getLocalUser.playerName !== NewUserDataConstruct.playerName) UserDataChanges.push(
+            {
+                name: getString('PLAYER_NAME') as string,
+                oldValue: userManagement.getLocalUser.playerName,
+                newValue: NewUserDataConstruct.playerName
+            }
+        );
+        /* PREFIX */
+        if (userManagement.getLocalUser.prefix !== NewUserDataConstruct.prefix) UserDataChanges.push(
+            {
+                name: getString('PREFIX') as string,
+                oldValue: userManagement.getLocalUser.prefix,
+                newValue: NewUserDataConstruct.prefix
+            }
+        );
+        /* PROFILE IMG */
+        if (userManagement.getLocalUser.profileImg !== NewUserDataConstruct.profileImg) UserDataChanges.push(
+            {
+                name: getString('PROFILE_IMG') as string,
+                oldValue: userManagement.getLocalUser.profileImg.substring(15, 30) + '...',
+                newValue: NewUserDataConstruct.profileImg.substring(15, 30) + '...'
+            }
+        );
+        /* PREFIX */
+        if (userManagement.getLocalUser.language !== NewUserDataConstruct.language) UserDataChanges.push(
+            {
+                name: getString('LANGUAGE') as string,
+                oldValue: userManagement.getLocalUser.language,
+                newValue: NewUserDataConstruct.language
+            }
+        );
     }
 
     const avatar = () => {
@@ -125,8 +197,21 @@ const UserSettingsPage = () => {
                     </Button>
                 </div>
                 <div className="row">
-                    <TextField id="settings-username" label={getString('USERNAME')} variant="outlined" defaultValue={userManagement.getLocalUser.auth.username} />
-                    <TextField id="settings-password" label={getString('PASSWORD')} variant="outlined" type="password" defaultValue={userManagement.getLocalUser.auth.password} />
+                    <TextField
+                        id="settings-username"
+                        label={getString('USERNAME')}
+                        variant="outlined"
+                        defaultValue={userManagement.getLocalUser.auth.username}
+                        onChange={() => SETTINGS_FORM_MANAGER.changeUsernameOrPassword(DUEGEV_CONSTANTS.username)}
+                    />
+                    <TextField
+                        id="settings-password"
+                        label={getString('PASSWORD')}
+                        variant="outlined"
+                        type="password"
+                        defaultValue={userManagement.getLocalUser.auth.password}
+                        onChange={() => SETTINGS_FORM_MANAGER.changeUsernameOrPassword(DUEGEV_CONSTANTS.password)}
+                    />
                 </div>
                 <div className="row">
                     <TextField
@@ -156,10 +241,42 @@ const UserSettingsPage = () => {
     }
 
     const ConfirmationDialogContent = () => {
-        return(
-            <p>
-                Hello world
-            </p>
+        detectUserDataChanges();
+        return (
+            <div id="confirmation-dialog-content">
+                <TableContainer component={Paper}>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell><GroupIcon /></TableCell>
+                                <TableCell align="right">Old Value</TableCell>
+                                <TableCell align="right">New Value</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {UserDataChanges.map((row) => (
+                                <TableRow
+                                    key={row.name}
+                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                >
+                                    <TableCell component="th" scope="row">
+                                        {row.name}
+                                    </TableCell>
+                                    <TableCell align="right">{row.oldValue}</TableCell>
+                                    <TableCell align="right">{row.newValue}</TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+                <Typography sx={{ mt: 1.5, fontSize: 15 }} color="text.secondary">
+                    {getString('CONFIRM_WITH_LOGIN')}
+                </Typography>
+                <div id="confirm-password">
+                    <TextField id="username-confirm" label={getString('USERNAME')} variant="outlined" />
+                    <TextField id="password-confirm" label={getString('PASSWORD')} variant="outlined" type="password" />
+                </div>
+            </div>
         );
     }
 

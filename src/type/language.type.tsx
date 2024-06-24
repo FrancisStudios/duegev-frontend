@@ -29,8 +29,10 @@ export type LanguageModel = {
     PLAYER_NAME: string,
     LANGUAGE: string,
     UPLOAD_PROFILE_IMG: string,
+    PROFILE_IMG: string,
     DO_YOU_WANT_TO_CHANGE_USER_DATA: string,
-    CANCEL: string
+    CANCEL: string,
+    CONFIRM_WITH_LOGIN:string
 }
 
 export enum ValidLanguages {

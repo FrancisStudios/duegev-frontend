@@ -31,8 +31,10 @@ const lang_hu: LanguageModel = {
     PLAYER_NAME: 'Játékosnév',
     LANGUAGE: 'Nyelv',
     UPLOAD_PROFILE_IMG: 'Profilkép feltöltése',
+    PROFILE_IMG: 'Profilkép',
     DO_YOU_WANT_TO_CHANGE_USER_DATA: 'A következő felhasználói adatok változni fognak',
-    CANCEL: 'Mégse'
+    CANCEL: 'Mégse',
+    CONFIRM_WITH_LOGIN: 'Erősítsd meg a változtatásokat a bejelentkezési adataiddal!'
 }
 
 export default lang_hu;

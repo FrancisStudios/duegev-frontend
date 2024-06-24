@@ -31,8 +31,10 @@ const lang_en: LanguageModel = {
     PLAYER_NAME: 'Player name',
     LANGUAGE: 'Language',
     UPLOAD_PROFILE_IMG: 'Upload profile image',
+    PROFILE_IMG: 'Profile picture',
     DO_YOU_WANT_TO_CHANGE_USER_DATA: 'The following user data will be changed',
-    CANCEL: 'Cancel'
+    CANCEL: 'Cancel',
+    CONFIRM_WITH_LOGIN: 'Confirm the changes with your credentials!'
 }
 
 export default lang_en;
