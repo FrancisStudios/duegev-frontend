@@ -49,6 +49,11 @@ const UserSettingsPage = () => {
         newValue: string
     }
 
+    const SETTINGS_CHANGE_CONFIRM_DIALOG_METHODS = {
+        exit: () => { },
+        save: () => { }
+    }
+
     const VisuallyHiddenInput = styled('input')({
         clip: 'rect(0 0 0 0)',
         clipPath: 'inset(50%)',
@@ -287,6 +292,8 @@ const UserSettingsPage = () => {
                 open={openDiffConfirmDialog}
                 close={() => { setOpenDiffConfirmDialog(false) }}
                 content={ConfirmationDialogContent()}
+                save={() => SETTINGS_CHANGE_CONFIRM_DIALOG_METHODS.save()}
+                exit={() => SETTINGS_CHANGE_CONFIRM_DIALOG_METHODS.exit()}
             />
             <Card id="settings-card">
                 <CardContent>
