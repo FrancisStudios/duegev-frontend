@@ -30,7 +30,9 @@ const lang_en: LanguageModel = {
     PREFIX: 'Prefix',
     PLAYER_NAME: 'Player name',
     LANGUAGE: 'Language',
-    UPLOAD_PROFILE_IMG: 'Upload profile image'
+    UPLOAD_PROFILE_IMG: 'Upload profile image',
+    DO_YOU_WANT_TO_CHANGE_USER_DATA: 'The following user data will be changed',
+    CANCEL: 'Cancel'
 }
 
 export default lang_en;

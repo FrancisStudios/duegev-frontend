@@ -30,7 +30,9 @@ const lang_hu: LanguageModel = {
     PREFIX: 'Prefixum',
     PLAYER_NAME: 'Játékosnév',
     LANGUAGE: 'Nyelv',
-    UPLOAD_PROFILE_IMG: 'Profilkép feltöltése'
+    UPLOAD_PROFILE_IMG: 'Profilkép feltöltése',
+    DO_YOU_WANT_TO_CHANGE_USER_DATA: 'A következő felhasználói adatok változni fognak',
+    CANCEL: 'Mégse'
 }
 
 export default lang_hu;

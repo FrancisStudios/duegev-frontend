@@ -158,6 +158,7 @@ const UserSettingsPage = () => {
     return (
         <div id="settings-card-wrapper">
             <SlideInDialog
+                title={getString('DO_YOU_WANT_TO_CHANGE_USER_DATA') as string}
                 open={openDiffConfirmDialog}
                 close={() => { setOpenDiffConfirmDialog(false) }}
             />
