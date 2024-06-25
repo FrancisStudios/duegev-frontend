@@ -15,10 +15,13 @@ import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import TagList from '../component/atomic-components/tag-list/tag-list.component';
 import { DUEGEV_CONSTANTS } from '../enum/constants.enum';
-import { UserData } from '../type/user-data.type';
+import { UserAuthenticationResponse, UserData } from '../type/user-data.type';
 import React from 'react';
 import SlideInDialog from '../component/atomic-components/slide-in-dialog/slide-in-dialog.component';
 import GroupIcon from '@mui/icons-material/Group';
+import User from '../services/user-auth.service';
+import { DuegevEncryptor } from '../util/encryptor.util';
+import { DuegevAPIResponseMessage } from '../services/API/API.enum';
 
 const UserSettingsPage = () => {
 
@@ -51,7 +54,58 @@ const UserSettingsPage = () => {
 
     const SETTINGS_CHANGE_CONFIRM_DIALOG_METHODS = {
         exit: () => { },
-        save: () => { }
+        save: () => {
+            const authenticateMe = (): Promise<UserAuthenticationResponse> => {
+                return new Promise((resolve) => {
+                    const username: string = (document.getElementById('username-confirm') as HTMLInputElement).value;
+                    const passwordBase: string = (document.getElementById('password-confirm') as HTMLInputElement).value;
+                    const password: string = DuegevEncryptor.SHA512Encrypt(passwordBase, DUEGEV_CONSTANTS.defaultLoginSalt);
+
+                    User
+                        .attemptAuthentication(username, password)
+                        .then((response) => resolve(response));
+                });
+            }
+
+            const displayUnsuccessfulCredentials = (newPasswordConfirm: boolean = false) => {
+                newPasswordConfirm
+                    ? console.log()
+                    : console.log('');
+            }
+
+            const displayEndResults = (response: UserAuthenticationResponse, didPasswordChange: boolean = false) => {
+                /**
+                 * ACTION => Send out user data change intent to backend! && Wait for response
+                 * 
+                 * IF didPasswordChange => logout && redirect to login page && alert password successfully changed
+                 * 
+                 * IF !didPasswordChange => alert that your data have been changed! && fetch new user (can use the authenticateMe() user) 
+                 */
+
+                console.log('end-results ::', response)
+            }
+
+            if (NewUserDataConstruct.auth.password !== userManagement.getLocalUser.auth.password) {
+                const pwConfirm: string = (document.getElementById('new-password-confirm') as HTMLInputElement).value ?? ''
+                pwConfirm === NewUserDataConstruct.auth.password
+                    ? (authenticateMe()
+                        .then((response: UserAuthenticationResponse) => {
+                            if (response.message === DuegevAPIResponseMessage.OK) {
+                                displayEndResults(response, true);
+                            } else displayUnsuccessfulCredentials();
+                        })
+                    )
+
+                    : displayUnsuccessfulCredentials(true);
+            } else {
+                authenticateMe()
+                    .then((response: UserAuthenticationResponse) => {
+                        if (response.message === DuegevAPIResponseMessage.OK) {
+                            displayEndResults(response);
+                        } else displayUnsuccessfulCredentials();
+                    });
+            }
+        }
     }
 
     const VisuallyHiddenInput = styled('input')({
