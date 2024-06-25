@@ -32,7 +32,11 @@ export type LanguageModel = {
     PROFILE_IMG: string,
     DO_YOU_WANT_TO_CHANGE_USER_DATA: string,
     CANCEL: string,
-    CONFIRM_WITH_LOGIN:string
+    CONFIRM_WITH_LOGIN:string,
+    NEW_PASSWORD: string,
+    CONFIRM_YOUR_NEW_PW: string,
+    OLD_VALUE: string,
+    NEW_VALUE: string
 }
 
 export enum ValidLanguages {

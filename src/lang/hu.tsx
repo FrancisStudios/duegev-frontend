@@ -34,7 +34,11 @@ const lang_hu: LanguageModel = {
     PROFILE_IMG: 'Profilkép',
     DO_YOU_WANT_TO_CHANGE_USER_DATA: 'A következő felhasználói adatok változni fognak',
     CANCEL: 'Mégse',
-    CONFIRM_WITH_LOGIN: 'Erősítsd meg a változtatásokat a bejelentkezési adataiddal!'
+    CONFIRM_WITH_LOGIN: 'Erősítsd meg a változtatásokat a bejelentkezési adataiddal!',
+    NEW_PASSWORD: 'Új jelszó',
+    CONFIRM_YOUR_NEW_PW: 'Erősítsd meg az új jelszavadat!',
+    OLD_VALUE: 'Korábbi érték',
+    NEW_VALUE: 'Új érték'
 }
 
 export default lang_hu;

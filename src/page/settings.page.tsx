@@ -245,6 +245,20 @@ const UserSettingsPage = () => {
         );
     }
 
+    const renderPasswordConfirmationField = () => {
+        return NewUserDataConstruct.auth.password !== userManagement.getLocalUser.auth.password
+            ? (<>
+                <Typography sx={{ mt: 1.5, fontSize: 15 }} color="text.secondary">
+                    {getString('CONFIRM_YOUR_NEW_PW')}
+                </Typography>
+                <div id="confirm-new-password">
+                    <TextField id="new-password-confirm" label={getString('NEW_PASSWORD')} variant="outlined" type="password" />
+                </div>
+            </>)
+
+            : <></>
+    }
+
     const ConfirmationDialogContent = () => {
         detectUserDataChanges();
         return (
@@ -254,8 +268,8 @@ const UserSettingsPage = () => {
                         <TableHead>
                             <TableRow>
                                 <TableCell><GroupIcon /></TableCell>
-                                <TableCell align="right">Old Value</TableCell>
-                                <TableCell align="right">New Value</TableCell>
+                                <TableCell align="right">{getString('OLD_VALUE')}</TableCell>
+                                <TableCell align="right">{getString('NEW_VALUE')}</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -274,6 +288,7 @@ const UserSettingsPage = () => {
                         </TableBody>
                     </Table>
                 </TableContainer>
+                {renderPasswordConfirmationField()}
                 <Typography sx={{ mt: 1.5, fontSize: 15 }} color="text.secondary">
                     {getString('CONFIRM_WITH_LOGIN')}
                 </Typography>

@@ -34,7 +34,11 @@ const lang_en: LanguageModel = {
     PROFILE_IMG: 'Profile picture',
     DO_YOU_WANT_TO_CHANGE_USER_DATA: 'The following user data will be changed',
     CANCEL: 'Cancel',
-    CONFIRM_WITH_LOGIN: 'Confirm the changes with your credentials!'
+    CONFIRM_WITH_LOGIN: 'Confirm the changes with your credentials!',
+    NEW_PASSWORD: 'Új jelszó',
+    CONFIRM_YOUR_NEW_PW: 'Confirm your new password',
+    OLD_VALUE: 'Old value',
+    NEW_VALUE: 'New value'
 }
 
 export default lang_en;
