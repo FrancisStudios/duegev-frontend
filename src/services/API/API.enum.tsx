@@ -14,5 +14,5 @@ export enum DuegevAPIResponseMessage {
 }
 
 export enum API_PATH {
-    AUTH = '/api/auth',
+    AUTH = '/api/auth'
 }

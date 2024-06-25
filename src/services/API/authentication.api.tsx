@@ -1,5 +1,3 @@
-import { UserPrivileges } from "../../enum/privileges.enum";
-import { ValidLanguages } from "../../type/language.type";
 import { SHA512String, UserAuthenticationQuery, UserAuthenticationResponse } from "../../type/user-data.type";
 import { APIConnection } from "./API.connection";
 import { API_PATH, DuegevAPIIntents, DuegevAPIResponseMessage } from "./API.enum";

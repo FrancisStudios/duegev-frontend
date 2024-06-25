@@ -31,5 +31,13 @@ export type UserAuthenticationQuery = {
     query: AuthenticationKeys
 }
 
+export type UserDataChangeQuery = {
+    intent: DuegevAPIIntents.UPDATE_USER,
+    query: {
+        currentUserFromLocal: UserAuthenticationResponse,
+        newUserDataConstruct: UserData
+    }
+}
+
 export type LoginRequest = AuthenticationKeys;
 export type SHA512String = string;

@@ -22,6 +22,8 @@ import GroupIcon from '@mui/icons-material/Group';
 import User from '../services/user-auth.service';
 import { DuegevEncryptor } from '../util/encryptor.util';
 import { DuegevAPIResponseMessage } from '../services/API/API.enum';
+import { API } from '../services/API/API';
+import { APIResponse } from '../services/API/API.type';
 
 const UserSettingsPage = () => {
 
@@ -69,7 +71,7 @@ const UserSettingsPage = () => {
 
             const displayUnsuccessfulCredentials = (newPasswordConfirm: boolean = false) => {
                 newPasswordConfirm
-                    ? console.log()
+                    ? console.log() /* SNACKBAR DISPLAY WILL BE */
                     : console.log('');
             }
 
@@ -82,7 +84,29 @@ const UserSettingsPage = () => {
                  * IF !didPasswordChange => alert that your data have been changed! && fetch new user (can use the authenticateMe() user) 
                  */
 
-                console.log('end-results ::', response)
+                /* Response Auth Override*/
+
+                /* Override Username and Password with field values */
+                const assignNewUsernameAndPW = (): UserAuthenticationResponse => {
+                    const localUserAuthResponse = response;
+                    if (localUserAuthResponse.data) {
+                        localUserAuthResponse.data.user.auth.username = (document.getElementById('username-confirm') as HTMLInputElement).value;
+                        localUserAuthResponse.data.user.auth.password = DuegevEncryptor.SHA512Encrypt(
+                            ((document.getElementById('password-confirm') as HTMLInputElement).value),
+                            DUEGEV_CONSTANTS.defaultLoginSalt
+                        );
+                    }
+                    return localUserAuthResponse;
+                }
+
+                API
+                    .changeUserData(assignNewUsernameAndPW(), NewUserDataConstruct)
+                    .then((response: UserAuthenticationResponse) => {
+                        if (response.message === DuegevAPIResponseMessage.OK) {
+                            const updatedUserData: UserData = response.data ? response.data.user : ({} as UserData);
+                            console.log(updatedUserData);
+                        }
+                    });
             }
 
             if (NewUserDataConstruct.auth.password !== userManagement.getLocalUser.auth.password) {

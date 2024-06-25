@@ -6,9 +6,11 @@
  */
 
 import { ArticleQueryResponse } from "../../type/article.type";
-import { SHA512String, UserAuthenticationResponse } from "../../type/user-data.type";
+import { SHA512String, UserAuthenticationResponse, UserData } from "../../type/user-data.type";
+import { APIResponse } from "./API.type";
 import { ArticleAPI } from "./article.api";
 import { AuthenticationAPI } from "./authentication.api";
+import { UserEndpoint } from "./user-endpoint.api";
 
 export class API {
     private static instance: API;
@@ -27,5 +29,9 @@ export class API {
 
     public static authenticate(username: string, password: SHA512String): Promise<UserAuthenticationResponse> {
         return AuthenticationAPI.authenticateUser(username, password);
+    }
+
+    public static changeUserData(currentUserObject: UserAuthenticationResponse, NewUserDataConstruct: UserData) : Promise<UserAuthenticationResponse> {
+        return UserEndpoint.changeUser(currentUserObject, NewUserDataConstruct);
     }
 }
