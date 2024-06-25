@@ -23,7 +23,7 @@ import User from '../services/user-auth.service';
 import { DuegevEncryptor } from '../util/encryptor.util';
 import { DuegevAPIResponseMessage } from '../services/API/API.enum';
 import { API } from '../services/API/API';
-import { APIResponse } from '../services/API/API.type';
+import RandomHashGen64 from '../util/random-hash.util';
 
 const UserSettingsPage = () => {
 
@@ -31,6 +31,7 @@ const UserSettingsPage = () => {
     const availabeLanguages: Array<OptionSelectCustomOption> = Object.values(ValidLanguages).map((value) => ({ label: value, value: value }));
     const [userAvatar, setUserAvatar] = React.useState(userManagement.getLocalUser.profileImg);
     const [openDiffConfirmDialog, setOpenDiffConfirmDialog] = React.useState(false);
+    const [rf, setRF] = React.useState<string>('');
     const [NewUserDataConstruct, setNewUserDataConstruct] = React.useState<UserData>(
         {
             uid: userManagement.getLocalUser.uid,
@@ -177,24 +178,28 @@ const UserSettingsPage = () => {
             switch (target) {
                 case DUEGEV_CONSTANTS.playername:
                     NewUserDataConstruct.playerName = ((document.getElementById('settings-playername') as HTMLInputElement).value as string) ?? '';
+                    setRF(RandomHashGen64());
                     break;
 
                 case DUEGEV_CONSTANTS.prefix:
                     NewUserDataConstruct.prefix = ((document.getElementById('settings-prefix') as HTMLInputElement).value as string) ?? '';
+                    setRF(RandomHashGen64());
                     break;
             }
         },
 
-        changeLanguage: (e: PointerEvent) => { NewUserDataConstruct.language = (e.target as HTMLSelectElement)?.value as ValidLanguages; },
+        changeLanguage: (e: PointerEvent) => { NewUserDataConstruct.language = (e.target as HTMLSelectElement)?.value as ValidLanguages; setRF(RandomHashGen64()); },
 
         changeUsernameOrPassword(target: DUEGEV_CONSTANTS.username | DUEGEV_CONSTANTS.password) {
             switch (target) {
                 case DUEGEV_CONSTANTS.username:
                     NewUserDataConstruct.auth.username = ((document.getElementById('settings-username') as HTMLInputElement).value as string) ?? '';
+                    setRF(RandomHashGen64());
                     break;
 
                 case DUEGEV_CONSTANTS.password:
                     NewUserDataConstruct.auth.password = ((document.getElementById('settings-password') as HTMLInputElement).value as string) ?? '';
+                    setRF(RandomHashGen64());
                     break;
             }
         }
@@ -286,6 +291,7 @@ const UserSettingsPage = () => {
                         variant="outlined"
                         defaultValue={userManagement.getLocalUser.auth.username}
                         onChange={() => SETTINGS_FORM_MANAGER.changeUsernameOrPassword(DUEGEV_CONSTANTS.username)}
+                        disabled
                     />
                     <TextField
                         id="settings-password"
@@ -404,7 +410,14 @@ const UserSettingsPage = () => {
                     </div>
                 </CardContent>
                 <CardActions id="settings-card-actions">
-                    <Button size="small" onClick={() => setOpenDiffConfirmDialog(true)}>{getString('SAVE')}</Button>
+                    <Button
+                        size="small"
+                        onClick={() => setOpenDiffConfirmDialog(true)}
+                        id="settings-save-action-button"
+                        disabled={UserDataChanges.length === 0}
+                    >
+                        {getString('SAVE')}
+                    </Button>
                 </CardActions>
             </Card>
         </div>
