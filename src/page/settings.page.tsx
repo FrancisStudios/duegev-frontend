@@ -16,7 +16,7 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import TagList from '../component/atomic-components/tag-list/tag-list.component';
 import { DUEGEV_CONSTANTS } from '../enum/constants.enum';
 import { UserAuthenticationResponse, UserData } from '../type/user-data.type';
-import React from 'react';
+import React, { useState } from 'react';
 import SlideInDialog from '../component/atomic-components/slide-in-dialog/slide-in-dialog.component';
 import GroupIcon from '@mui/icons-material/Group';
 import User from '../services/user-auth.service';
@@ -24,6 +24,7 @@ import { DuegevEncryptor } from '../util/encryptor.util';
 import { DuegevAPIResponseMessage } from '../services/API/API.enum';
 import { API } from '../services/API/API';
 import RandomHashGen64 from '../util/random-hash.util';
+import SnackBar from '../component/atomic-components/snackbar/snackbar.component';
 
 const UserSettingsPage = () => {
 
@@ -32,6 +33,8 @@ const UserSettingsPage = () => {
     const [userAvatar, setUserAvatar] = React.useState(userManagement.getLocalUser.profileImg);
     const [openDiffConfirmDialog, setOpenDiffConfirmDialog] = React.useState(false);
     const [rf, setRF] = React.useState<string>('');
+    const [snackBarOpen, setsnackBarOpen] = React.useState<boolean>(false);
+    const [snackBarMessage, setSnackBarMessage] = React.useState<string>('');
     const [NewUserDataConstruct, setNewUserDataConstruct] = React.useState<UserData>(
         {
             uid: userManagement.getLocalUser.uid,
@@ -55,6 +58,11 @@ const UserSettingsPage = () => {
         newValue: string
     }
 
+    const OPEN_SNACKBAR_ROUTINE = () => {
+        setsnackBarOpen(true);
+        setTimeout(() => setsnackBarOpen(false), 1500);
+    }
+
     const SETTINGS_CHANGE_CONFIRM_DIALOG_METHODS = {
         exit: () => { },
         save: () => {
@@ -72,22 +80,18 @@ const UserSettingsPage = () => {
 
             const displayUnsuccessfulCredentials = (newPasswordConfirm: boolean = false) => {
                 newPasswordConfirm
-                    ? console.log() /* SNACKBAR DISPLAY WILL BE */
-                    : console.log('');
+                    ? setSnackBarMessage(getString('NEW_PASSWORD_CONFIRM_INV') as string)
+                    : setSnackBarMessage(getString('PASSWORD_CONFIRM_INVALID') as string);
+
+                OPEN_SNACKBAR_ROUTINE();
+            }
+
+            const displayMiscellaniousError = () => {
+                setSnackBarMessage(getString('INTERNAL_SERVER_ERROR') as string);
+                OPEN_SNACKBAR_ROUTINE();
             }
 
             const displayEndResults = (response: UserAuthenticationResponse, didPasswordChange: boolean = false) => {
-                /**
-                 * ACTION => Send out user data change intent to backend! && Wait for response
-                 * 
-                 * IF didPasswordChange => logout && redirect to login page && alert password successfully changed
-                 * 
-                 * IF !didPasswordChange => alert that your data have been changed! && fetch new user (can use the authenticateMe() user) 
-                 */
-
-                /* Response Auth Override*/
-
-                /* Override Username and Password with field values */
                 const assignNewUsernameAndPW = (): UserAuthenticationResponse => {
                     const localUserAuthResponse = response;
                     if (localUserAuthResponse.data) {
@@ -104,10 +108,10 @@ const UserSettingsPage = () => {
                     .changeUserData(assignNewUsernameAndPW(), NewUserDataConstruct)
                     .then((response: UserAuthenticationResponse) => {
                         if (response.message === DuegevAPIResponseMessage.OK) {
-                            const updatedUserData: UserData = response.data ? response.data.user : ({} as UserData);
-                            userManagement.loginNewUser(response);
-                            console.log('new User data', response);
-                        }
+                            userManagement.logOutUser();
+                            window.location.pathname = '/login';
+                            window.alert(getString('SETTINGS_SAVE_SUCCESSFUL'));
+                        } else displayMiscellaniousError();
                     });
             }
 
@@ -387,6 +391,11 @@ const UserSettingsPage = () => {
 
     return (
         <div id="settings-card-wrapper">
+            <SnackBar
+                message={snackBarMessage}
+                severity='warning'
+                open={snackBarOpen}
+            />
             <SlideInDialog
                 title={getString('DO_YOU_WANT_TO_CHANGE_USER_DATA') as string}
                 open={openDiffConfirmDialog}

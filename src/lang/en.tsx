@@ -38,7 +38,11 @@ const lang_en: LanguageModel = {
     NEW_PASSWORD: 'Új jelszó',
     CONFIRM_YOUR_NEW_PW: 'Confirm your new password',
     OLD_VALUE: 'Old value',
-    NEW_VALUE: 'New value'
+    NEW_VALUE: 'New value',
+    PASSWORD_CONFIRM_INVALID: 'The username or password is invalid!',
+    NEW_PASSWORD_CONFIRM_INV: 'The new password and password confirmation does not match!',
+    INTERNAL_SERVER_ERROR: 'Server Error! Changes were not saved!',
+    SETTINGS_SAVE_SUCCESSFUL: 'The changes were successfully saved! Now we log you off, so your changes can take effect. Please log in!'
 }
 
 export default lang_en;

@@ -1,4 +1,5 @@
 import { DUEGEV_CONSTANTS } from "../enum/constants.enum";
+import { ValidLanguages } from "../type/language.type";
 import { UserAuthenticationResponse, UserData } from "../type/user-data.type";
 import { DuegevEncryptor } from "../util/encryptor.util";
 
@@ -22,6 +23,8 @@ export class UserDataStore {
         return DuegevEncryptor.SHA512Encrypt(playerName, 'seskeyun');
     }
 
+    private setLanguage(language: ValidLanguages) { localStorage.setItem('lang', language); }
+
     loginNewUser(userLoginData: UserAuthenticationResponse) {
         this.userLoginData = userLoginData;
         this.userData = userLoginData.data?.user as UserData;
@@ -41,6 +44,8 @@ export class UserDataStore {
             DUEGEV_CONSTANTS.duegevUserItemKey,
             JSON.stringify(this.userData)
         );
+
+        this.setLanguage(this.userData.language);
     }
 
     logOutUser() {
@@ -49,7 +54,9 @@ export class UserDataStore {
 
     get getLocalUser(): UserData {
         const user: UserData = JSON.parse(localStorage.getItem(DUEGEV_CONSTANTS.duegevUserItemKey) as string);
-        user.privileges = JSON.parse(user.privileges as unknown as string);
+        if (!Array.isArray(user.privileges)) {
+            user.privileges = JSON.parse(user.privileges as unknown as string);
+        }
         return user;
     }
 
@@ -67,6 +74,7 @@ export class UserDataStore {
 
     checkIfLoggedIn(): boolean {
         const user: UserData = JSON.parse(localStorage.getItem(DUEGEV_CONSTANTS.duegevUserItemKey) as string);
+        if (user?.language) this.setLanguage(user.language);
         if (user?.auth?.username && user?.playerName && user?.uid) {
             this.isUserLoggedIn = true;
             this.userData = user;

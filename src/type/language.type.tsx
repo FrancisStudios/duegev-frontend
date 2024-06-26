@@ -36,7 +36,11 @@ export type LanguageModel = {
     NEW_PASSWORD: string,
     CONFIRM_YOUR_NEW_PW: string,
     OLD_VALUE: string,
-    NEW_VALUE: string
+    NEW_VALUE: string,
+    PASSWORD_CONFIRM_INVALID: string,
+    NEW_PASSWORD_CONFIRM_INV: string,
+    INTERNAL_SERVER_ERROR: string,
+    SETTINGS_SAVE_SUCCESSFUL: string,
 }
 
 export enum ValidLanguages {

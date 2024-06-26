@@ -38,7 +38,11 @@ const lang_hu: LanguageModel = {
     NEW_PASSWORD: 'Új jelszó',
     CONFIRM_YOUR_NEW_PW: 'Erősítsd meg az új jelszavadat!',
     OLD_VALUE: 'Korábbi érték',
-    NEW_VALUE: 'Új érték'
+    NEW_VALUE: 'Új érték',
+    PASSWORD_CONFIRM_INVALID: 'A jelszó vagy felhasználónév nem megfelelő!',
+    NEW_PASSWORD_CONFIRM_INV: 'A megerősített és az új jelszó nem egyezik!',
+    INTERNAL_SERVER_ERROR: 'Szerver hiba! A mentés sikertelen.',
+    SETTINGS_SAVE_SUCCESSFUL: 'A mentés sikeres volt! Most kijelentkeztetünk, hogy az új adataid érvényesüljenek. Kérjük jelentkezzen be ismét!'
 }
 
 export default lang_hu;

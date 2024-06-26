@@ -1,7 +1,14 @@
-import { Alert, Button, Snackbar } from "@mui/material";
+import { Alert, AlertColor, Button, Snackbar } from "@mui/material";
 import React from "react";
 
-const SnackBar = () => {
+
+export type SnackBarProps = {
+    message: string,
+    severity: AlertColor
+    open: boolean
+}
+
+const SnackBar = (props: SnackBarProps) => {
     const [open, setOpen] = React.useState(false);
 
     const handleClick = () => { setOpen(true); };
@@ -10,17 +17,18 @@ const SnackBar = () => {
         setOpen(false);
     };
 
+    if (props.open) setTimeout(handleClick, 100);
+
     return (
         <>
-            <Button onClick={handleClick}>Open Snackbar</Button>
             <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
                 <Alert
                     onClose={handleClose}
-                    severity="success"
+                    severity={props.severity}
                     variant="filled"
                     sx={{ width: '100%' }}
                 >
-                    This is a success Alert inside a Snackbar!
+                    {props.message}
                 </Alert>
             </Snackbar>
         </>
