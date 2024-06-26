@@ -27,6 +27,11 @@ export class UserDataStore {
         this.userData = userLoginData.data?.user as UserData;
         this.isUserLoggedIn = true;
 
+        this.userData.privileges = JSON
+            .parse(
+                JSON.stringify(this.userData.privileges as unknown as string)
+            )
+
         localStorage.setItem(
             this.getSessionTokenUserKey(this.userData.playerName),
             userLoginData.data?.session_token as string
@@ -43,7 +48,9 @@ export class UserDataStore {
     }
 
     get getLocalUser(): UserData {
-        return JSON.parse(localStorage.getItem(DUEGEV_CONSTANTS.duegevUserItemKey) as string);
+        const user: UserData = JSON.parse(localStorage.getItem(DUEGEV_CONSTANTS.duegevUserItemKey) as string);
+        user.privileges = JSON.parse(user.privileges as unknown as string);
+        return user;
     }
 
     get getSessionToken(): (string | 'fail') {

@@ -105,7 +105,8 @@ const UserSettingsPage = () => {
                     .then((response: UserAuthenticationResponse) => {
                         if (response.message === DuegevAPIResponseMessage.OK) {
                             const updatedUserData: UserData = response.data ? response.data.user : ({} as UserData);
-                            console.log(updatedUserData);
+                            userManagement.loginNewUser(response);
+                            console.log('new User data', response);
                         }
                     });
             }
