@@ -13,7 +13,8 @@ import { useNavigate } from 'react-router-dom';
 import SnackBar from '../component/atomic-components/snackbar/snackbar.component';
 import React from 'react';
 
-const LoginPage = () => {
+export type LoginPageProps = { isLoginSuccessful?: CallableFunction }
+const LoginPage = (props: LoginPageProps) => {
     const [snackBarOpen, setSnackBarOpen] = React.useState<boolean>(false);
     const OPEN_SNACKBAR_ROUTINE = () => { setSnackBarOpen(true); setTimeout(() => setSnackBarOpen(false), 1500); }
 
@@ -39,6 +40,7 @@ const LoginPage = () => {
                         const userMgmt = UserDataStore.getInstance();
                         userMgmt.loginNewUser(response);
                         clearInputFields();
+                        if (props?.isLoginSuccessful) props.isLoginSuccessful();
                         navigate(`/${PAGES.HOME}`);
                         break;
 

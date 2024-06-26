@@ -13,12 +13,13 @@ import UserSettingsPage from './page/settings.page';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { UserDataStore } from './store/user-data.store';
 import UserPrivilegesPage from './page/privileges.page';
+import React from 'react';
 
 function App() {
   const customTheme = getCustomTheme();
   const UserManagement = UserDataStore.getInstance();
 
-  UserManagement.checkIfLoggedIn();
+  const [isLoggedIn, setIsLoggedIn] = React.useState<boolean>(UserManagement.isLoggedIn);
 
   return (
     <ThemeProvider theme={customTheme}>
@@ -28,11 +29,11 @@ function App() {
         <div id="content_conftainer">
           <Routes>
             <Route path={PAGES.HOME} element={<HomePage />} />
-            <Route path={PAGES.LOGIN} element={<LoginPage />} />
+            <Route path={PAGES.LOGIN} element={<LoginPage isLoginSuccessful={() => { setIsLoggedIn(UserManagement.isLoggedIn) }} />} />
             <Route path={PAGES.MAP} element={<MapPage />} />
-            <Route path={PAGES.CREATE} element={UserManagement.isLoggedIn ? <CreatePage /> : <HomePage />} />
-            <Route path={PAGES.SETTINGS} element={UserManagement.isLoggedIn ? <UserSettingsPage /> : <HomePage />} />
-            <Route path={PAGES.PRIVILEGES} element={UserManagement.isLoggedIn ? <UserPrivilegesPage /> : <HomePage />} />
+            <Route path={PAGES.CREATE} element={isLoggedIn ? <CreatePage /> : <HomePage />} />
+            <Route path={PAGES.SETTINGS} element={isLoggedIn ? <UserSettingsPage /> : <HomePage />} />
+            <Route path={PAGES.PRIVILEGES} element={isLoggedIn ? <UserPrivilegesPage /> : <HomePage />} />
             <Route path='*' element={<HomePage />} />
             <Route path='/' element={<HomePage />} />
           </Routes>

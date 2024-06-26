@@ -83,5 +83,5 @@ export class UserDataStore {
         return false;
     }
 
-    get isLoggedIn(): boolean { return this.isUserLoggedIn ?? false; }
+    get isLoggedIn(): boolean { return this.checkIfLoggedIn(); }
 }
