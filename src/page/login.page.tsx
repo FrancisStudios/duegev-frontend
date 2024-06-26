@@ -10,8 +10,12 @@ import { DuegevAPIResponseMessage } from '../services/API/API.enum';
 import PAGES from '../enum/valid-page-locations.enum';
 import { UserDataStore } from '../store/user-data.store';
 import { useNavigate } from 'react-router-dom';
+import SnackBar from '../component/atomic-components/snackbar/snackbar.component';
+import React from 'react';
 
 const LoginPage = () => {
+    const [snackBarOpen, setSnackBarOpen] = React.useState<boolean>(false);
+    const OPEN_SNACKBAR_ROUTINE = () => { setSnackBarOpen(true); setTimeout(() => setSnackBarOpen(false), 1500); }
 
     const navigate = useNavigate();
 
@@ -39,7 +43,7 @@ const LoginPage = () => {
                         break;
 
                     case DuegevAPIResponseMessage.FAIL:
-                        window.alert(getString('UNSUCCESSFUL_LOGIN_MSG'));
+                        OPEN_SNACKBAR_ROUTINE();
                         break;
                 }
             });
@@ -47,6 +51,11 @@ const LoginPage = () => {
 
     return (
         <div id="login-page-wrapper">
+            <SnackBar
+                open={snackBarOpen}
+                message={getString('UNSUCCESSFUL_LOGIN_MSG') as string}
+                severity={'error'}
+            />
             <Card sx={{ minWidth: 275 }} id='duegev_login_card'>
                 <CardContent>
                     <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
