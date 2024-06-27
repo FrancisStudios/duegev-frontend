@@ -42,7 +42,9 @@ const lang_en: LanguageModel = {
     PASSWORD_CONFIRM_INVALID: 'The username or password is invalid!',
     NEW_PASSWORD_CONFIRM_INV: 'The new password and password confirmation does not match!',
     INTERNAL_SERVER_ERROR: 'Server Error! Changes were not saved!',
-    SETTINGS_SAVE_SUCCESSFUL: 'The changes were successfully saved! Now we log you off, so your changes can take effect. Please log in!'
+    SETTINGS_SAVE_SUCCESSFUL: 'The changes were successfully saved! Now we log you off, so your changes can take effect. Please log in!',
+    USER_RECRUITMENT_PANEL: 'Player Recruitment Panel',
+    USER_RECRUITMENT_MESSAGE: 'To recruit new users, please fill the following form'
 }
 
 export default lang_en;

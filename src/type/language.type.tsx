@@ -41,6 +41,8 @@ export type LanguageModel = {
     NEW_PASSWORD_CONFIRM_INV: string,
     INTERNAL_SERVER_ERROR: string,
     SETTINGS_SAVE_SUCCESSFUL: string,
+    USER_RECRUITMENT_PANEL: string,
+    USER_RECRUITMENT_MESSAGE: string
 }
 
 export enum ValidLanguages {

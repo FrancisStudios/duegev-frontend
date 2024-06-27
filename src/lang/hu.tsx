@@ -42,7 +42,9 @@ const lang_hu: LanguageModel = {
     PASSWORD_CONFIRM_INVALID: 'A jelszó vagy felhasználónév nem megfelelő!',
     NEW_PASSWORD_CONFIRM_INV: 'A megerősített és az új jelszó nem egyezik!',
     INTERNAL_SERVER_ERROR: 'Szerver hiba! A mentés sikertelen.',
-    SETTINGS_SAVE_SUCCESSFUL: 'A mentés sikeres volt! Most kijelentkeztetünk, hogy az új adataid érvényesüljenek. Kérjük jelentkezzen be ismét!'
+    SETTINGS_SAVE_SUCCESSFUL: 'A mentés sikeres volt! Most kijelentkeztetünk, hogy az új adataid érvényesüljenek. Kérjük jelentkezzen be ismét!',
+    USER_RECRUITMENT_PANEL: 'Játékos Toborzó Panel',
+    USER_RECRUITMENT_MESSAGE: 'Új játékosok felvételéhez kérem töltse ki a következő mezőket'
 }
 
 export default lang_hu;

@@ -2,6 +2,7 @@ import { Button, Card, CardActions, CardContent, Typography } from "@mui/materia
 import { PrivilegePanelProps } from "../privilege-typedefinitions.type";
 import './create-user.panel.css';
 import '../generic-privilege-panel.style.css';
+import getString from "../../../util/language-server.util";
 
 const CreateUserPanel = (props: PrivilegePanelProps) => {
 
@@ -16,18 +17,13 @@ const CreateUserPanel = (props: PrivilegePanelProps) => {
                 <Card >
                     <CardContent>
                         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                            Word of the Day
+                            {getString('USER_RECRUITMENT_PANEL')}
                         </Typography>
-                        <Typography variant="h5" component="div">
-                            blinode
-                        </Typography>
-                        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                            adjective
+                        <Typography sx={{ mb: 1.5, fontSize: 11 }} color="text.secondary">
+                            by Dynar Software Technologies Inc.
                         </Typography>
                         <Typography variant="body2">
-                            well meaning and kindly.
-                            <br />
-                            {'"a benevolent smile"'}
+                            {getString('USER_RECRUITMENT_MESSAGE')}
                         </Typography>
                     </CardContent>
                     <CardActions>
