@@ -15,6 +15,14 @@ This is the third major version of the Duegev Wiki project
 2) Angular SPA Duegev Wiki, that was built but never really took off.
 3) React SPA Duegev Wiki Frontend - current application hosted on our intranet
 
+## Dûgev Wiki Backend 🔌
+
+You can also access the [Duegev Wiki Backend](https://github.com/FrancisStudios/duegev-backend) on our intranet server, so you can interface with the Duegev Database programmatically. You will find the documentation under the repository's README.md
+
+https://github.com/FrancisStudios/duegev-backend
+
+For any technical questions / issues, reach out to ``@francis``
+
 ## Changelog and releases 📃
 
 | Version  | Release Date | Codename         | Description                   |
