@@ -41,12 +41,28 @@ export type UserDataChangeQuery = {
 
 export type UserCreationQuery = {
     intent: DuegevAPIIntents.CREATE_USER,
-    query: {
-        username: string,
-        password: string,
-        playerName: string,
-        language: string
+    query: UserCreationData
+}
+
+export type UserCreationData = {
+    username: string,
+    password: string,
+    session_token: string,
+}
+
+export type UserCreationResponse = {
+    intent: DuegevAPIIntents,
+    message: DuegevAPIResponseMessage,
+    data: {
+        message: UserCreationErrorMessages | 'created'
     }
+}
+
+export enum UserCreationErrorMessages {
+    FAULTY_PASSWORD = 'faulty_password',
+    FAULTY_USERNAME = 'faulty_username',
+    FAULTY_PRIVILEGES = 'faulty_privileges',
+    FAULTY_CREDENTIALS = 'faulty_credentials',
 }
 
 export type LoginRequest = AuthenticationKeys;
