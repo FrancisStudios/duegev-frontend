@@ -3,6 +3,8 @@ import { PrivilegePanelProps } from "../privilege-typedefinitions.type";
 import './create-user.panel.css';
 import '../generic-privilege-panel.style.css';
 import getString from "../../../util/language-server.util";
+import CustomInput from "../../atomic-components/custom-input/custom-input";
+import { DuegevEncryptor } from "../../../util/encryptor.util";
 
 const CreateUserPanel = (props: PrivilegePanelProps) => {
 
@@ -10,6 +12,10 @@ const CreateUserPanel = (props: PrivilegePanelProps) => {
         props.privileges.includes('sudo') ||
         props.privileges.includes('recruiter')
     );
+
+    const refreshPasswordGen = (data: { event: Event, id: string, label: string }) => {
+        (document.getElementById(data.id) as HTMLInputElement).value = DuegevEncryptor.generateRandomString(8);
+    }
 
     return _isEligible
         ? (
@@ -25,6 +31,22 @@ const CreateUserPanel = (props: PrivilegePanelProps) => {
                         <Typography variant="body2">
                             {getString('USER_RECRUITMENT_MESSAGE')}
                         </Typography>
+                        <div id="cuserpanel-content">
+                            <div id="cuserpanel-row">
+                                <CustomInput id="new-username" label={getString('USERNAME') as string} />
+                                <CustomInput
+                                    id="new-password"
+                                    label={getString('PASSWORD') as string}
+                                    disabled
+                                    refresh
+                                    refreshClicked={
+                                        (data: { event: Event, id: string, label: string }) => {
+                                            refreshPasswordGen(data)
+                                        }
+                                    }
+                                    defaultValue={DuegevEncryptor.generateRandomString(8)} />
+                            </div>
+                        </div>
                     </CardContent>
                     <CardActions>
                         <Button size="small">Learn More</Button>

@@ -15,4 +15,11 @@ export class DuegevEncryptor {
             : salt;
         return sha512.crypt(word, salt);
     }
+
+    public static generateRandomString(length: number): string {
+        const alphabet: string = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        let result = '';
+        for (let i = length; i > 0; --i) { result += alphabet[Math.floor(Math.random() * alphabet.length)]; }
+        return result;
+    }
 }
