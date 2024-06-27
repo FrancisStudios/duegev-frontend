@@ -42,7 +42,12 @@ export type LanguageModel = {
     INTERNAL_SERVER_ERROR: string,
     SETTINGS_SAVE_SUCCESSFUL: string,
     USER_RECRUITMENT_PANEL: string,
-    USER_RECRUITMENT_MESSAGE: string
+    USER_RECRUITMENT_MESSAGE: string,
+    USER_RECRUITMENT_COPY_MESSAGE: string,
+    ACKNOWLEDGE_SHARE: string,
+    CREATE_USER: string,
+    ACKNOWLEDGE_USER: string,
+    CREATE_USER_DATA_ENTRY_ERROR: string,
 }
 
 export enum ValidLanguages {

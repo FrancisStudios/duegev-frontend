@@ -44,7 +44,12 @@ const lang_en: LanguageModel = {
     INTERNAL_SERVER_ERROR: 'Server Error! Changes were not saved!',
     SETTINGS_SAVE_SUCCESSFUL: 'The changes were successfully saved! Now we log you off, so your changes can take effect. Please log in!',
     USER_RECRUITMENT_PANEL: 'Player Recruitment Panel',
-    USER_RECRUITMENT_MESSAGE: 'To recruit new users, please fill the following form'
+    USER_RECRUITMENT_MESSAGE: 'To recruit new users, please fill the following form',
+    USER_RECRUITMENT_COPY_MESSAGE: 'Please share the username and the generated password with the new recruitee',
+    ACKNOWLEDGE_SHARE: 'I have copied and shared the login data!',
+    CREATE_USER: 'Create user',
+    ACKNOWLEDGE_USER: 'I take responsibility for the new user',
+    CREATE_USER_DATA_ENTRY_ERROR: 'Data entry error! Warning, the username should be at least 3 character, and the sliders should be set!',
 }
 
 export default lang_en;

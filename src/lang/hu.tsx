@@ -44,7 +44,12 @@ const lang_hu: LanguageModel = {
     INTERNAL_SERVER_ERROR: 'Szerver hiba! A mentés sikertelen.',
     SETTINGS_SAVE_SUCCESSFUL: 'A mentés sikeres volt! Most kijelentkeztetünk, hogy az új adataid érvényesüljenek. Kérjük jelentkezzen be ismét!',
     USER_RECRUITMENT_PANEL: 'Játékos Toborzó Panel',
-    USER_RECRUITMENT_MESSAGE: 'Új játékosok felvételéhez kérem töltse ki a következő mezőket'
+    USER_RECRUITMENT_MESSAGE: 'Új játékosok felvételéhez kérem töltse ki a következő mezőket',
+    USER_RECRUITMENT_COPY_MESSAGE: 'A felhasználónevet és a generált jelszót üzenetben ossza meg az új játékossal!',
+    ACKNOWLEDGE_SHARE: 'A bejelentkezési adatokat kimásoltam, és megosztottam!',
+    CREATE_USER: 'Felhasználó létrehozása',
+    ACKNOWLEDGE_USER: 'Az új felhasználóért felelősséget vállalok',
+    CREATE_USER_DATA_ENTRY_ERROR: 'A bevitt adatok nem megfelelőek! Figyelem, a felhasználónév legalább 3 karakter hosszú legyen, és a feltételek legyenek elfogadva!',
 }
 
 export default lang_hu;
