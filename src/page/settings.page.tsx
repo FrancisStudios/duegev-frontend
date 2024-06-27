@@ -413,7 +413,7 @@ const UserSettingsPage = () => {
                         {`${userManagement.getLocalUser.prefix} ${userManagement.getLocalUser.playerName}`}
                     </Typography>
                     <Typography sx={{ mb: 1.5, fontSize: 11 }} color="text.secondary">
-                        by Dynar Software Inc.
+                        by Dynar Software Technologies Inc.
                     </Typography>
                     <div id="user-settings-form-wrapper">
                         {userSettingsForm()}
