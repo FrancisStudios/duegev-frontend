@@ -39,5 +39,15 @@ export type UserDataChangeQuery = {
     }
 }
 
+export type UserCreationQuery = {
+    intent: DuegevAPIIntents.CREATE_USER,
+    query: {
+        username: string,
+        password: string,
+        playerName: string,
+        language: string
+    }
+}
+
 export type LoginRequest = AuthenticationKeys;
 export type SHA512String = string;
