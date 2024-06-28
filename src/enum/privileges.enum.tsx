@@ -1,5 +1,5 @@
 export enum UserPrivileges {
-    READER = 'reader',
+    PLAYER = 'player',
     EDITOR = 'editor',
     TIME_MGMT = 'time_management',
     ADD_LABELS = 'add_labels',
