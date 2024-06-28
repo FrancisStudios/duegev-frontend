@@ -6,7 +6,7 @@
  */
 
 import { ArticleQueryResponse } from "../../type/article.type";
-import { SHA512String, UserAuthenticationResponse, UserCreationData, UserData } from "../../type/user-data.type";
+import { SHA512String, UserAuthenticationResponse, UserCreationData, UserCreationResponse, UserData } from "../../type/user-data.type";
 import { ArticleAPI } from "./article.api";
 import { AuthenticationAPI } from "./authentication.api";
 import { UserEndpoint } from "./user-endpoint.api";
@@ -34,7 +34,7 @@ export class API {
         return UserEndpoint.changeUser(currentUserObject, NewUserDataConstruct);
     }
 
-    public static createUser(createUserQuery: UserCreationData) {
+    public static createUser(createUserQuery: UserCreationData): Promise<UserCreationResponse> {
         return UserEndpoint.createUser(createUserQuery);
     }
 }

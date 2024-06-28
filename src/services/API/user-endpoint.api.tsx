@@ -1,4 +1,4 @@
-import { UserAuthenticationResponse, UserCreationData, UserCreationQuery, UserData, UserDataChangeQuery } from "../../type/user-data.type";
+import { UserAuthenticationResponse, UserCreationData, UserCreationQuery, UserCreationResponse, UserData, UserDataChangeQuery } from "../../type/user-data.type";
 import { APIConnection } from "./API.connection";
 import { API_PATH, DuegevAPIIntents } from "./API.enum";
 
@@ -31,7 +31,7 @@ export class UserEndpoint {
         });
     }
 
-    public static createUser(userCreationData: UserCreationData): Promise<UserAuthenticationResponse> {
+    public static createUser(userCreationData: UserCreationData): Promise<UserCreationResponse> {
         return new Promise((resolve) => {
             const request: UserCreationQuery = {
                 intent: DuegevAPIIntents.CREATE_USER,
@@ -41,6 +41,10 @@ export class UserEndpoint {
                     session_token: userCreationData.session_token
                 }
             }
+
+            this
+                .makeRequest(request)
+                .then(r => resolve(r));
         });
     }
 }

@@ -7,6 +7,9 @@ import CustomInput from "../../atomic-components/custom-input/custom-input";
 import { DuegevEncryptor } from "../../../util/encryptor.util";
 import React from "react";
 import SnackBar from "../../atomic-components/snackbar/snackbar.component";
+import { API } from "../../../services/API/API";
+import { UserCreationData, UserCreationResponse } from "../../../type/user-data.type";
+import { UserDataStore } from "../../../store/user-data.store";
 
 const CreateUserPanel = (props: PrivilegePanelProps) => {
     const [copyAck, setCopyAck] = React.useState<boolean>(false);
@@ -14,6 +17,8 @@ const CreateUserPanel = (props: PrivilegePanelProps) => {
     const [snackBarOpen, setSnackBarOpen] = React.useState<boolean>(false);
     const [snackBarMessage, setSnackBarMessage] = React.useState<string>('');
     const [snackBarSeverity, setSnackBarSeverity] = React.useState<AlertColor>('info');
+
+    const UserManagement = UserDataStore.getInstance();
 
     const _isEligible: boolean = (
         props.privileges.includes('sudo') ||
@@ -35,6 +40,15 @@ const CreateUserPanel = (props: PrivilegePanelProps) => {
 
         if (_criteria) {
             console.log('create new user')
+            const userCreationData: UserCreationData = {
+                username: username,
+                password: password,
+                session_token: UserManagement.getSessionToken
+            }
+
+            API
+                .createUser(userCreationData)
+                .then((message: UserCreationResponse) => { });
         } else {
             setSnackBarMessage(getString('CREATE_USER_DATA_ENTRY_ERROR') as string);
             setSnackBarSeverity('error')
