@@ -49,11 +49,11 @@ const CreateUserPanel = (props: PrivilegePanelProps) => {
             API
                 .createUser(userCreationData)
                 .then((message: UserCreationResponse) => {
-                    console.log(message);
                     if (message.message === DuegevAPIResponseMessage.OK && message.data.message === 'created') {
                         setSnackBarMessage(getString('USER_SUCCESSFULLY_CREATED') as string);
                         setSnackBarSeverity('success');
                         (document.getElementById('new-username') as HTMLInputElement).value = '';
+                        setCopyAck(false); setUserAck(false);
                         OPEN_SNACKBAR_ROUTINE();
                     } else {
                         setSnackBarMessage(getString('USER_CREATE_INTERNAL_ERROR') as string)
@@ -107,10 +107,18 @@ const CreateUserPanel = (props: PrivilegePanelProps) => {
                                     </Typography>
                                 </div>
                                 <div id="cuserpanel-row">
-                                    <FormControlLabel control={<Switch onChange={() => { setCopyAck(!copyAck); }} />} label={getString('ACKNOWLEDGE_SHARE') as string} />
+                                    <FormControlLabel
+                                        control={<Switch onChange={() => { setCopyAck(!copyAck); }} />}
+                                        label={getString('ACKNOWLEDGE_SHARE') as string}
+                                        checked={copyAck}
+                                    />
                                 </div>
                                 <div id="cuserpanel-row">
-                                    <FormControlLabel control={<Switch onChange={() => { setUserAck(!userAck); }} />} label={getString('ACKNOWLEDGE_USER') as string} />
+                                    <FormControlLabel
+                                        control={<Switch onChange={() => { setUserAck(!userAck); }} />}
+                                        label={getString('ACKNOWLEDGE_USER') as string}
+                                        checked={userAck}
+                                    />
                                 </div>
                             </div>
                         </CardContent>
