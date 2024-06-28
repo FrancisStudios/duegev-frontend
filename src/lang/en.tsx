@@ -50,6 +50,8 @@ const lang_en: LanguageModel = {
     CREATE_USER: 'Create user',
     ACKNOWLEDGE_USER: 'I take responsibility for the new user',
     CREATE_USER_DATA_ENTRY_ERROR: 'Data entry error! Warning, the username should be at least 3 character, and the sliders should be set!',
+    USER_SUCCESSFULLY_CREATED: 'New user successfully created!',
+    USER_CREATE_INTERNAL_ERROR: 'Error! New user was not created!',
 }
 
 export default lang_en;

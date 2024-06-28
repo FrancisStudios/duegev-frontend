@@ -50,6 +50,8 @@ const lang_hu: LanguageModel = {
     CREATE_USER: 'Felhasználó létrehozása',
     ACKNOWLEDGE_USER: 'Az új felhasználóért felelősséget vállalok',
     CREATE_USER_DATA_ENTRY_ERROR: 'A bevitt adatok nem megfelelőek! Figyelem, a felhasználónév legalább 3 karakter hosszú legyen, és a feltételek legyenek elfogadva!',
+    USER_SUCCESSFULLY_CREATED: 'Felhasználó sikeresen létrehozva!',
+    USER_CREATE_INTERNAL_ERROR: 'Hiba a felhasználó létrehozásban!',
 }
 
 export default lang_hu;

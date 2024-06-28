@@ -10,6 +10,7 @@ import SnackBar from "../../atomic-components/snackbar/snackbar.component";
 import { API } from "../../../services/API/API";
 import { UserCreationData, UserCreationResponse } from "../../../type/user-data.type";
 import { UserDataStore } from "../../../store/user-data.store";
+import { DuegevAPIResponseMessage } from "../../../services/API/API.enum";
 
 const CreateUserPanel = (props: PrivilegePanelProps) => {
     const [copyAck, setCopyAck] = React.useState<boolean>(false);
@@ -39,7 +40,6 @@ const CreateUserPanel = (props: PrivilegePanelProps) => {
         );
 
         if (_criteria) {
-            console.log('create new user')
             const userCreationData: UserCreationData = {
                 username: username,
                 password: password,
@@ -48,10 +48,22 @@ const CreateUserPanel = (props: PrivilegePanelProps) => {
 
             API
                 .createUser(userCreationData)
-                .then((message: UserCreationResponse) => { });
+                .then((message: UserCreationResponse) => {
+                    console.log(message);
+                    if (message.message === DuegevAPIResponseMessage.OK && message.data.message === 'created') {
+                        setSnackBarMessage(getString('USER_SUCCESSFULLY_CREATED') as string);
+                        setSnackBarSeverity('success');
+                        (document.getElementById('new-username') as HTMLInputElement).value = '';
+                        OPEN_SNACKBAR_ROUTINE();
+                    } else {
+                        setSnackBarMessage(getString('USER_CREATE_INTERNAL_ERROR') as string)
+                        setSnackBarSeverity('error');
+                        OPEN_SNACKBAR_ROUTINE();
+                    }
+                });
         } else {
             setSnackBarMessage(getString('CREATE_USER_DATA_ENTRY_ERROR') as string);
-            setSnackBarSeverity('error')
+            setSnackBarSeverity('error');
             OPEN_SNACKBAR_ROUTINE();
         }
     }

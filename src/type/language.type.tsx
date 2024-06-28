@@ -48,6 +48,8 @@ export type LanguageModel = {
     CREATE_USER: string,
     ACKNOWLEDGE_USER: string,
     CREATE_USER_DATA_ENTRY_ERROR: string,
+    USER_SUCCESSFULLY_CREATED: string,
+    USER_CREATE_INTERNAL_ERROR: string
 }
 
 export enum ValidLanguages {
