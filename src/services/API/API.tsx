@@ -6,7 +6,7 @@
  */
 
 import { ArticleQueryResponse } from "../../type/article.type";
-import { Label } from "../../type/label.type";
+import { Label, LabelQueryResponse } from "../../type/label.type";
 import { SHA512String, UserAuthenticationResponse, UserCreationData, UserCreationResponse, UserData } from "../../type/user-data.type";
 import { ArticleAPI } from "./article.api";
 import { AuthenticationAPI } from "./authentication.api";
@@ -42,5 +42,9 @@ export class API {
 
     public static getAllLabels(): Promise<Label[]> {
         return LabelsEndpoint.getAllLabels();
+    }
+
+    public static createLabel(labelData: Label): Promise<LabelQueryResponse> {
+        return LabelsEndpoint.createLabel(labelData)
     }
 }

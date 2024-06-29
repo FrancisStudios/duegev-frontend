@@ -64,6 +64,11 @@ const lang_en: LanguageModel = {
     DESCRIPTION: 'Description',
     LABEL_ADDED_MSG: 'Label successfully saved!',
     LABEL_ADD_ERROR: 'Error! Could not save label.',
+    INVALID_SESSION_TOKEN: 'Invalid session token!',
+    INSUFFICIENT_PRIVILEGES: 'You are not authorized to perfom this action!',
+    LABEL_ALREADY_EXISTS: 'This label already exists!',
+    FAULTY_LABEL: 'Labels should be at least 3 characters in length!',
+    LABEL_CREATED_SUCCESSFULLY: 'Label created successfully!'
 }
 
 export default lang_en;

@@ -62,6 +62,11 @@ export type LanguageModel = {
     DESCRIPTION: string,
     LABEL_ADDED_MSG: string,
     LABEL_ADD_ERROR: string,
+    INVALID_SESSION_TOKEN: string,
+    INSUFFICIENT_PRIVILEGES: string,
+    LABEL_ALREADY_EXISTS: string,
+    FAULTY_LABEL: string,
+    LABEL_CREATED_SUCCESSFULLY: string,
 }
 
 export enum ValidLanguages {

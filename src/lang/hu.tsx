@@ -64,6 +64,11 @@ const lang_hu: LanguageModel = {
     DESCRIPTION: 'Leírás',
     LABEL_ADDED_MSG: 'Címke sikeresen mentve!',
     LABEL_ADD_ERROR: 'Hiba! Nem tudtuk menteni a címkét.',
+    INVALID_SESSION_TOKEN: 'Hibás session token!',
+    INSUFFICIENT_PRIVILEGES: 'Nincs megfelelő jogosultságod!',
+    LABEL_ALREADY_EXISTS: 'Ez a címke már létezik!',
+    FAULTY_LABEL: 'A címkének legalább 3 karakter hosszúnak kell lennie!',
+    LABEL_CREATED_SUCCESSFULLY: 'Címke létrehozva',
 }
 
 export default lang_hu;

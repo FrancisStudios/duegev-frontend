@@ -1,3 +1,9 @@
 #tag-manager-wrapper {
     width: 90%;
 }
+
+#search-result-table-wrapper {
+    max-height: 350px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
