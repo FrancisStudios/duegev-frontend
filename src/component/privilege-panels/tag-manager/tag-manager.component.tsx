@@ -65,7 +65,7 @@ const TagMananger = (props: PrivilegePanelProps) => {
                     OPEN_SNACKBAR_ROUTINE();
                 }
 
-                if ((lqr.message === DuegevAPIResponseMessage.OK) && (Object.values(LabelQueryError).includes(lqr.data as LabelQueryError))) {
+                if ((lqr.message === DuegevAPIResponseMessage.FAIL) && (Object.values(LabelQueryError).includes(lqr.data as LabelQueryError))) {
                     switch (lqr.data) {
                         case LabelQueryError.INVALID_SESSION_TOKEN:
                             shoutWithSnackBar('error', getString('INVALID_SESSION_TOKEN') as string);
