@@ -55,6 +55,13 @@ export type LanguageModel = {
     MY_LABELS_BUTTON: string,
     ALL_LABELS_BUTTON: string,
     INVALID_FILE_PROFILE_IMG: string,
+    LABEL_TEXT_VALUE: string,
+    LABEL_DESCRIPTION: string,
+    LABEL_ACTIONS: string,
+    LABEL: string,
+    DESCRIPTION: string,
+    LABEL_ADDED_MSG: string,
+    LABEL_ADD_ERROR: string,
 }
 
 export enum ValidLanguages {

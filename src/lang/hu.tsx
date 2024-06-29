@@ -57,6 +57,13 @@ const lang_hu: LanguageModel = {
     MY_LABELS_BUTTON: 'Enyém',
     ALL_LABELS_BUTTON: 'Összes',
     INVALID_FILE_PROFILE_IMG: 'Nem megfelelő fájl!',
+    LABEL_TEXT_VALUE: 'Címke',
+    LABEL_DESCRIPTION: 'Leírás',
+    LABEL_ACTIONS: 'Kezelés',
+    LABEL: 'Címke',
+    DESCRIPTION: 'Leírás',
+    LABEL_ADDED_MSG: 'Címke sikeresen mentve!',
+    LABEL_ADD_ERROR: 'Hiba! Nem tudtuk menteni a címkét.',
 }
 
 export default lang_hu;

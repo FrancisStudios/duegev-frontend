@@ -5,6 +5,10 @@ export enum DuegevAPIIntents {
     GET_ALL_USERS = 'get_all_users', /* Getting all users (non-sensitive) */
     UPDATE_USER = 'update_user', /* Updating user data in DB */
     DELTE_USER = 'delete_user', /* Removing user from DB (sudo only) */
+    GET_ALL_LABELS = 'get_all_labels',
+    CREATE_LABEL = 'create_label',
+    DELETE_LABEL = 'delete_label',
+    UPDATE_LABEL = 'update_label'
 }
 
 /* These are the responses you can get in 'message' field */
@@ -14,5 +18,6 @@ export enum DuegevAPIResponseMessage {
 }
 
 export enum API_PATH {
-    AUTH = '/api/auth'
+    AUTH = '/api/auth',
+    LABELS = '/api/label',
 }

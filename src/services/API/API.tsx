@@ -6,9 +6,11 @@
  */
 
 import { ArticleQueryResponse } from "../../type/article.type";
+import { Label } from "../../type/label.type";
 import { SHA512String, UserAuthenticationResponse, UserCreationData, UserCreationResponse, UserData } from "../../type/user-data.type";
 import { ArticleAPI } from "./article.api";
 import { AuthenticationAPI } from "./authentication.api";
+import { LabelsEndpoint } from "./labels-endpoint-api";
 import { UserEndpoint } from "./user-endpoint.api";
 
 export class API {
@@ -36,5 +38,9 @@ export class API {
 
     public static createUser(createUserQuery: UserCreationData): Promise<UserCreationResponse> {
         return UserEndpoint.createUser(createUserQuery);
+    }
+
+    public static getAllLabels(): Promise<Label[]> {
+        return LabelsEndpoint.getAllLabels();
     }
 }

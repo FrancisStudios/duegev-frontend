@@ -57,6 +57,13 @@ const lang_en: LanguageModel = {
     MY_LABELS_BUTTON: 'Mine',
     ALL_LABELS_BUTTON: 'All',
     INVALID_FILE_PROFILE_IMG: 'Invalid file!',
+    LABEL_TEXT_VALUE: 'Label text',
+    LABEL_DESCRIPTION: 'Description',
+    LABEL_ACTIONS: 'Actions',
+    LABEL: 'Label',
+    DESCRIPTION: 'Description',
+    LABEL_ADDED_MSG: 'Label successfully saved!',
+    LABEL_ADD_ERROR: 'Error! Could not save label.',
 }
 
 export default lang_en;
