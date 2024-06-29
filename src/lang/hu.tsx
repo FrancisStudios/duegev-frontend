@@ -52,6 +52,10 @@ const lang_hu: LanguageModel = {
     CREATE_USER_DATA_ENTRY_ERROR: 'A bevitt adatok nem megfelelőek! Figyelem, a felhasználónév legalább 3 karakter hosszú legyen, és a feltételek legyenek elfogadva!',
     USER_SUCCESSFULLY_CREATED: 'Felhasználó sikeresen létrehozva!',
     USER_CREATE_INTERNAL_ERROR: 'Hiba a felhasználó létrehozásban!',
+    TAG_MANAGER_DESCRIPTION: 'Ebben a menüben hozzáadhatsz új címkéket, illetve módosíthatod és törölheted korábbi címkéidet!',
+    TAG_MANAGER_WARNING: 'Figyelem! Olyan címkék módosítása, törlése, amely meglévő cikkekhez van hozzáadva, a cikkek megjelölésének pontosságát befolyásolhatja!',
+    MY_LABELS_BUTTON: 'Enyém',
+    ALL_LABELS_BUTTON: 'Összes'
 }
 
 export default lang_hu;

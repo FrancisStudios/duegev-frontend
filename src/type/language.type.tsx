@@ -49,7 +49,11 @@ export type LanguageModel = {
     ACKNOWLEDGE_USER: string,
     CREATE_USER_DATA_ENTRY_ERROR: string,
     USER_SUCCESSFULLY_CREATED: string,
-    USER_CREATE_INTERNAL_ERROR: string
+    USER_CREATE_INTERNAL_ERROR: string,
+    TAG_MANAGER_DESCRIPTION: string,
+    TAG_MANAGER_WARNING: string,
+    MY_LABELS_BUTTON: string,
+    ALL_LABELS_BUTTON: string,
 }
 
 export enum ValidLanguages {

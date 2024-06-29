@@ -52,6 +52,10 @@ const lang_en: LanguageModel = {
     CREATE_USER_DATA_ENTRY_ERROR: 'Data entry error! Warning, the username should be at least 3 character, and the sliders should be set!',
     USER_SUCCESSFULLY_CREATED: 'New user successfully created!',
     USER_CREATE_INTERNAL_ERROR: 'Error! New user was not created!',
+    TAG_MANAGER_DESCRIPTION: 'In this menu you can create new lagels, also modify or delete existing labels!',
+    TAG_MANAGER_WARNING: 'Warning! Modifying or deleting labels that are added onto existing articles can cause mislabeled documents!',
+    MY_LABELS_BUTTON: 'Mine',
+    ALL_LABELS_BUTTON: 'All'
 }
 
 export default lang_en;
