@@ -6,5 +6,6 @@ export enum DUEGEV_CONSTANTS {
     playername = 'playername',
     prefix = 'prefix',
     username = 'username',
-    password = 'password'
+    password = 'password',
+    max_filesize_profileImg = '75 kB',
 }

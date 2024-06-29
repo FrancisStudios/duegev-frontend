@@ -55,7 +55,8 @@ const lang_en: LanguageModel = {
     TAG_MANAGER_DESCRIPTION: 'In this menu you can create new lagels, also modify or delete existing labels!',
     TAG_MANAGER_WARNING: 'Warning! Modifying or deleting labels that are added onto existing articles can cause mislabeled documents!',
     MY_LABELS_BUTTON: 'Mine',
-    ALL_LABELS_BUTTON: 'All'
+    ALL_LABELS_BUTTON: 'All',
+    INVALID_FILE_PROFILE_IMG: 'Invalid file!',
 }
 
 export default lang_en;

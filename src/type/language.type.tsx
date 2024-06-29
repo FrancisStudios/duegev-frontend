@@ -54,6 +54,7 @@ export type LanguageModel = {
     TAG_MANAGER_WARNING: string,
     MY_LABELS_BUTTON: string,
     ALL_LABELS_BUTTON: string,
+    INVALID_FILE_PROFILE_IMG: string,
 }
 
 export enum ValidLanguages {

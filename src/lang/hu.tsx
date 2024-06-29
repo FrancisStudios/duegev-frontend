@@ -55,7 +55,8 @@ const lang_hu: LanguageModel = {
     TAG_MANAGER_DESCRIPTION: 'Ebben a menüben hozzáadhatsz új címkéket, illetve módosíthatod és törölheted korábbi címkéidet!',
     TAG_MANAGER_WARNING: 'Figyelem! Olyan címkék módosítása, törlése, amely meglévő cikkekhez van hozzáadva, a cikkek megjelölésének pontosságát befolyásolhatja!',
     MY_LABELS_BUTTON: 'Enyém',
-    ALL_LABELS_BUTTON: 'Összes'
+    ALL_LABELS_BUTTON: 'Összes',
+    INVALID_FILE_PROFILE_IMG: 'Nem megfelelő fájl!',
 }
 
 export default lang_hu;

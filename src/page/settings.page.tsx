@@ -157,7 +157,14 @@ const UserSettingsPage = () => {
             const fileUploader: any = (document.getElementById('avatar-file-upload'));
             const fileName = fileUploader.files[0].name ?? DUEGEV_CONSTANTS.invalid;
             const file = fileUploader.files[0];
-            const validFile: boolean = (fileName && fileName !== DUEGEV_CONSTANTS.invalid && fileName.length > 1);
+            const validFile: boolean = (
+                fileName &&
+                fileName !== DUEGEV_CONSTANTS.invalid &&
+                fileName.length > 1 &&
+                file.size <= 75000
+            );
+
+            console.log(file.size);
             const _fileReader = new FileReader();
 
             if (validFile) {
@@ -176,6 +183,9 @@ const UserSettingsPage = () => {
                         setUserAvatar(_result);
                     }
                 });
+            } else {
+                setSnackBarMessage(getString('INVALID_FILE_PROFILE_IMG') as string);
+                OPEN_SNACKBAR_ROUTINE();
             }
         },
 
@@ -280,10 +290,10 @@ const UserSettingsPage = () => {
                         tabIndex={-1}
                         startIcon={<CloudUploadIcon />}
                     >
-                        {getString('UPLOAD_PROFILE_IMG') as string}
+                        {`${getString('UPLOAD_PROFILE_IMG') as string} (${DUEGEV_CONSTANTS.max_filesize_profileImg})`}
                         <VisuallyHiddenInput
                             type="file"
-                            accept="image/.jpg, .jpeg, .png"
+                            accept="image/.jpg, .jpeg, .png, .bmp"
                             onChange={SETTINGS_FORM_MANAGER.avatarUpload}
                             id="avatar-file-upload"
                         />

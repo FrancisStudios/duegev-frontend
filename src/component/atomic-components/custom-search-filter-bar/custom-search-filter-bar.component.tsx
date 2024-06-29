@@ -2,6 +2,8 @@
  * This component can be used for Tag Manager and also for Article Manager
  * page. So we can filter User Owned things quickly 
  * =======================================================================
+ * pbbly later we could modify this to be used in the article search page
+ * also (whith optional props maybe)
  */
 
 

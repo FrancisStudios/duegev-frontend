@@ -15,7 +15,7 @@ const TagMananger = (props: PrivilegePanelProps) => {
 
     const SEARCH_TOOLBAR_MANAGER = {
         searchChange: (searchValue: string) => {
-
+            console.log(searchValue)
         },
 
         filterAll: () => { console.log('filter all') },
