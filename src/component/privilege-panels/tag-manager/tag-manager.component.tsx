@@ -11,6 +11,7 @@ import { API } from '../../../services/API/API';
 import AddIcon from '@mui/icons-material/Add';
 import SnackBar from '../../atomic-components/snackbar/snackbar.component';
 import { DuegevAPIResponseMessage } from '../../../services/API/API.enum';
+import { UserDataStore } from '../../../store/user-data.store';
 
 const TagMananger = (props: PrivilegePanelProps) => {
     const [allLabels, setAllLabels] = React.useState<Label[]>([]);
@@ -19,6 +20,8 @@ const TagMananger = (props: PrivilegePanelProps) => {
     const [snackBarMessage, setSnackBarMessage] = React.useState<string>('');
     const [snackBarSeverity, setSnackBarSeverity] = React.useState<AlertColor>('info');
     const [creationCounter, setCreationCounter] = React.useState<number>(0);
+
+    const UserManagement = UserDataStore.getInstance();
 
     React.useEffect(() => {
         API
@@ -41,12 +44,18 @@ const TagMananger = (props: PrivilegePanelProps) => {
 
     const SEARCH_TOOLBAR_MANAGER = {
         searchChange: (searchValue: string) => {
-            console.log(searchValue);
+            const thisSearch: Array<Label> = allLabels.filter(l => l.label.includes(searchValue));
+            setSearchResults(thisSearch);
         },
 
-        filterAll: () => { console.log('filter all') },
+        filterAll: () => {
+            setSearchResults(allLabels);
+        },
 
-        filterUsers: () => { console.log('filter mine') }
+        filterUsers: () => {
+            const myLabels: Array<Label> = allLabels.filter(l => l.uid === UserManagement.getLocalUser.uid);
+            setSearchResults(myLabels);
+        }
     }
 
     const createNewLabel = () => {
