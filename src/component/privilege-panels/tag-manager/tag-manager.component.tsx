@@ -65,10 +65,10 @@ const TagMananger = (props: PrivilegePanelProps) => {
         template: (lid: number) => {
             return (
                 <div className='label-action-group'>
-                    <Fab size="small" color="primary" onClick={()=> {LABEL_ACTIONS.editLabel(lid)}}>
+                    <Fab size="small" color="primary" onClick={() => { LABEL_ACTIONS.editLabel(lid) }}>
                         <EditIcon />
                     </Fab>
-                    <Fab size="small" color="error" onClick={()=> {LABEL_ACTIONS.deleteLabel(lid)}}>
+                    <Fab size="small" color="error" onClick={() => { LABEL_ACTIONS.deleteLabel(lid) }}>
                         <DeleteForeverIcon />
                     </Fab>
                 </div>
@@ -160,7 +160,11 @@ const TagMananger = (props: PrivilegePanelProps) => {
                                         >
                                             <TableCell component="th" scope="row"> {label.lid} </TableCell>
                                             <TableCell align="right">{label.label}</TableCell>
-                                            <TableCell align="right">{label.description}</TableCell>
+                                            <TableCell align="right">
+                                                <Typography sx={{ fontSize: 12 }} color="text.secondary">
+                                                    {label.description}
+                                                </Typography>
+                                            </TableCell>
                                             <TableCell align="right">
                                                 {
                                                     (label.uid === UserManagement.getLocalUser.uid)
