@@ -12,6 +12,9 @@ import AddIcon from '@mui/icons-material/Add';
 import SnackBar from '../../atomic-components/snackbar/snackbar.component';
 import { DuegevAPIResponseMessage } from '../../../services/API/API.enum';
 import { UserDataStore } from '../../../store/user-data.store';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import EditIcon from '@mui/icons-material/Edit';
+import DoNotTouchIcon from '@mui/icons-material/DoNotTouch';
 
 const TagMananger = (props: PrivilegePanelProps) => {
     const [allLabels, setAllLabels] = React.useState<Label[]>([]);
@@ -55,6 +58,39 @@ const TagMananger = (props: PrivilegePanelProps) => {
         filterUsers: () => {
             const myLabels: Array<Label> = allLabels.filter(l => l.uid === UserManagement.getLocalUser.uid);
             setSearchResults(myLabels);
+        }
+    }
+
+    const LABEL_ACTIONS = {
+        template: (lid: number) => {
+            return (
+                <div className='label-action-group'>
+                    <Fab size="small" color="primary" onClick={()=> {LABEL_ACTIONS.editLabel(lid)}}>
+                        <EditIcon />
+                    </Fab>
+                    <Fab size="small" color="error" onClick={()=> {LABEL_ACTIONS.deleteLabel(lid)}}>
+                        <DeleteForeverIcon />
+                    </Fab>
+                </div>
+            );
+        },
+
+        notEditable: () => {
+            return (
+                <div className="label-action-group">
+                    <Fab size="small" color="error" disabled>
+                        <DoNotTouchIcon />
+                    </Fab>
+                </div>
+            );
+        },
+
+        deleteLabel: (lid: number) => {
+            console.log('delete', lid)
+        },
+
+        editLabel: (lid: number) => {
+            console.log('edit', lid)
         }
     }
 
@@ -125,7 +161,13 @@ const TagMananger = (props: PrivilegePanelProps) => {
                                             <TableCell component="th" scope="row"> {label.lid} </TableCell>
                                             <TableCell align="right">{label.label}</TableCell>
                                             <TableCell align="right">{label.description}</TableCell>
-                                            <TableCell align="right">{'future actions'}</TableCell>
+                                            <TableCell align="right">
+                                                {
+                                                    (label.uid === UserManagement.getLocalUser.uid)
+                                                        ? LABEL_ACTIONS.template(label.lid ?? -1)
+                                                        : LABEL_ACTIONS.notEditable()
+                                                }
+                                            </TableCell>
                                         </TableRow>
                                     ))
 
@@ -142,7 +184,7 @@ const TagMananger = (props: PrivilegePanelProps) => {
         return (
             <Box sx={{ flexGrow: 1 }}>
                 <AppBar position="static" sx={{ pt: 1.2, pb: 1.2, }}>
-                    <Toolbar sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, alignItems: 'center', justifyContent: 'start' }}>
+                    <Toolbar sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, alignItems: 'center', justifyContent: 'end' }}>
                         <TextField
                             id='label_name'
                             label={getString('LABEL')}
@@ -206,6 +248,5 @@ const TagMananger = (props: PrivilegePanelProps) => {
 
         : <></>
 }
-
 
 export default TagMananger;
