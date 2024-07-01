@@ -62,13 +62,13 @@ const TagMananger = (props: PrivilegePanelProps) => {
     }
 
     const LABEL_ACTIONS = {
-        template: (lid: number) => {
+        template: (label: Label) => {
             return (
                 <div className='label-action-group'>
-                    <Fab size="small" color="primary" onClick={() => { LABEL_ACTIONS.editLabel(lid) }}>
+                    <Fab size="small" color="primary" onClick={() => { LABEL_ACTIONS.editLabel(label) }}>
                         <EditIcon />
                     </Fab>
-                    <Fab size="small" color="error" onClick={() => { LABEL_ACTIONS.deleteLabel(lid) }}>
+                    <Fab size="small" color="error" onClick={() => { LABEL_ACTIONS.deleteLabel(label) }}>
                         <DeleteForeverIcon />
                     </Fab>
                 </div>
@@ -85,14 +85,29 @@ const TagMananger = (props: PrivilegePanelProps) => {
             );
         },
 
-        deleteLabel: (lid: number) => {
-            console.log('delete', lid)
+        deleteLabel: (label: Label) => {
+            API
+                .deleteLabel(label)
+                .then((response) => {
+                    if (response.message === DuegevAPIResponseMessage.OK) {
+                        shoutWithSnackBar('success', getString('LABEL_DELETED') as string);
+                        const _pCreationCounter: number = creationCounter + 1;
+                        setCreationCounter(_pCreationCounter);
+                    } else shoutWithSnackBar('error', getString('COULD_NOT_DELETE_LABEL') as string);
+                });
         },
 
-        editLabel: (lid: number) => {
-            console.log('edit', lid)
+        editLabel: (label: Label) => {
+            console.log('edit', label);
         }
     }
+
+    const shoutWithSnackBar = (severity: AlertColor, message: string) => {
+        setSnackBarMessage(message);
+        setSnackBarSeverity(severity);
+        OPEN_SNACKBAR_ROUTINE();
+    }
+
 
     const createNewLabel = () => {
         const labelData: Label = {
@@ -103,13 +118,6 @@ const TagMananger = (props: PrivilegePanelProps) => {
         API
             .createLabel(labelData)
             .then((lqr: LabelQueryResponse) => {
-
-                const shoutWithSnackBar = (severity: AlertColor, message: string) => {
-                    setSnackBarMessage(message);
-                    setSnackBarSeverity(severity);
-                    OPEN_SNACKBAR_ROUTINE();
-                }
-
                 if ((lqr.message === DuegevAPIResponseMessage.FAIL) && (Object.values(LabelQueryError).includes(lqr.data as LabelQueryError))) {
                     switch (lqr.data) {
                         case LabelQueryError.INVALID_SESSION_TOKEN:
@@ -168,7 +176,7 @@ const TagMananger = (props: PrivilegePanelProps) => {
                                             <TableCell align="right">
                                                 {
                                                     (label.uid === UserManagement.getLocalUser.uid)
-                                                        ? LABEL_ACTIONS.template(label.lid ?? -1)
+                                                        ? LABEL_ACTIONS.template(label)
                                                         : LABEL_ACTIONS.notEditable()
                                                 }
                                             </TableCell>

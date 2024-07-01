@@ -48,4 +48,22 @@ export class LabelsEndpoint {
                 .then((response: LabelQueryResponse) => { resolve(response) });
         });
     }
+
+    public static deleteLabel(labelData: Label): Promise<LabelQueryResponse> {
+        return new Promise(resolve => {
+            const query: LabelQuery = {
+                intent: DuegevAPIIntents.DELETE_LABEL,
+                query: {
+                    session_token: this.UserMgmt.getSessionToken,
+                    uid: this.UserMgmt.getLocalUser.uid,
+                    label: labelData.label,
+                    description: labelData.description,
+                    lid: labelData.lid
+                }
+            }
+
+            this.makeRequest(query)
+                .then((response: LabelQueryResponse) => { resolve(response) });
+        });
+    }
 }

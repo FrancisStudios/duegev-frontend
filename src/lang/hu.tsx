@@ -69,6 +69,8 @@ const lang_hu: LanguageModel = {
     LABEL_ALREADY_EXISTS: 'Ez a címke már létezik!',
     FAULTY_LABEL: 'A címkének legalább 3 karakter hosszúnak kell lennie!',
     LABEL_CREATED_SUCCESSFULLY: 'Címke létrehozva',
+    COULD_NOT_DELETE_LABEL: 'Hiba! A címkét nem tudtuk törölni!',
+    LABEL_DELETED: 'A címke sikeresen törölve lett!',
 }
 
 export default lang_hu;

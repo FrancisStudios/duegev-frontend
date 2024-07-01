@@ -67,6 +67,8 @@ export type LanguageModel = {
     LABEL_ALREADY_EXISTS: string,
     FAULTY_LABEL: string,
     LABEL_CREATED_SUCCESSFULLY: string,
+    COULD_NOT_DELETE_LABEL: string,
+    LABEL_DELETED: string,
 }
 
 export enum ValidLanguages {

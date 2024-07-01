@@ -68,7 +68,9 @@ const lang_en: LanguageModel = {
     INSUFFICIENT_PRIVILEGES: 'You are not authorized to perfom this action!',
     LABEL_ALREADY_EXISTS: 'This label already exists!',
     FAULTY_LABEL: 'Labels should be at least 3 characters in length!',
-    LABEL_CREATED_SUCCESSFULLY: 'Label created successfully!'
+    LABEL_CREATED_SUCCESSFULLY: 'Label created successfully!',
+    COULD_NOT_DELETE_LABEL: 'Error! Could not delete label!',
+    LABEL_DELETED: 'Success! The label has been deleted!',
 }
 
 export default lang_en;

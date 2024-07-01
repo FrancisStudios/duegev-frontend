@@ -45,6 +45,10 @@ export class API {
     }
 
     public static createLabel(labelData: Label): Promise<LabelQueryResponse> {
-        return LabelsEndpoint.createLabel(labelData)
+        return LabelsEndpoint.createLabel(labelData);
+    }
+
+    public static deleteLabel(labelData: Label): Promise<LabelQueryResponse> {
+        return LabelsEndpoint.deleteLabel(labelData);
     }
 }
