@@ -16,3 +16,10 @@
     flex-wrap: wrap;
     gap: 10px;
 }
+
+#label-deletion-confirm {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    align-content: center;
+}

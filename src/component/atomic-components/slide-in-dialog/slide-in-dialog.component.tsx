@@ -36,6 +36,7 @@ const SlideInDialog = (props: SlideInDialogProps) => {
 
     /* Sorry for this: There's an issue with the rendering cycle */
     if (props.open) setTimeout(handleClickOpen, 100);
+    else setTimeout(handleClose, 100);
 
     return (
         <React.Fragment>
@@ -50,14 +51,21 @@ const SlideInDialog = (props: SlideInDialogProps) => {
                     {props.content}
                 </DialogContent>
                 <DialogActions>
-                    <Button
-                        onClick={
-                            () => {
-                                if (props.save) props.save();
-                                handleClose();
-                            }}>
-                        {getString('SAVE')}
-                    </Button>
+                    {
+                        props?.save
+                            ? (
+                                <Button
+                                    onClick={
+                                        () => {
+                                            if (props.save) props.save();
+                                            handleClose();
+                                        }}>
+                                    {getString('SAVE')}
+                                </Button>
+                            )
+
+                            : <></>
+                    }
                     <Button onClick={
                         () => {
                             if (props.exit) props.exit();

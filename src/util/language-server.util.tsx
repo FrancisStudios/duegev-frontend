@@ -2,7 +2,7 @@ import lang_en from '../lang/en';
 import lang_hu from '../lang/hu';
 import { LanguageModel } from '../type/language.type';
 
-const getString = (id: keyof LanguageModel): String => {
+const getString = (id: keyof LanguageModel): string => {
     let language: LanguageModel;
 
     switch (localStorage.getItem('lang') as string) {
@@ -23,7 +23,7 @@ const getString = (id: keyof LanguageModel): String => {
             break;
     }
 
-    return language[id] as String;
+    return language[id] as string;
 }
 
 export default getString;

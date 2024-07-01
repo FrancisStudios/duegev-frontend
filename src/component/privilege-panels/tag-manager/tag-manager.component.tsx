@@ -15,6 +15,8 @@ import { UserDataStore } from '../../../store/user-data.store';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
 import DoNotTouchIcon from '@mui/icons-material/DoNotTouch';
+import SlideInDialog from '../../atomic-components/slide-in-dialog/slide-in-dialog.component';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 const TagMananger = (props: PrivilegePanelProps) => {
     const [allLabels, setAllLabels] = React.useState<Label[]>([]);
@@ -23,6 +25,10 @@ const TagMananger = (props: PrivilegePanelProps) => {
     const [snackBarMessage, setSnackBarMessage] = React.useState<string>('');
     const [snackBarSeverity, setSnackBarSeverity] = React.useState<AlertColor>('info');
     const [creationCounter, setCreationCounter] = React.useState<number>(0);
+    const [openConfirmDialog, setOpenConfirmDialog] = React.useState<boolean>(false);
+    const [titleConfirmDialog, setTitleConfirmDialog] = React.useState<string>('');
+    const [selectedLabel2Delete, setSelectedLabel2Delete] = React.useState<string>('');
+    const [deleteIntent, setDeleteIntent] = React.useState<Label>({} as Label);
 
     const UserManagement = UserDataStore.getInstance();
 
@@ -86,12 +92,20 @@ const TagMananger = (props: PrivilegePanelProps) => {
         },
 
         deleteLabel: (label: Label) => {
+            setTitleConfirmDialog(getString('DELETE_LABEL_CONFIRMATION_TITLE'));
+            setSelectedLabel2Delete(label.label);
+            setOpenConfirmDialog(true);
+            setDeleteIntent(label);
+        },
+
+        confirmLabelDelete: () => {
             API
-                .deleteLabel(label)
+                .deleteLabel(deleteIntent)
                 .then((response) => {
                     if (response.message === DuegevAPIResponseMessage.OK) {
                         shoutWithSnackBar('success', getString('LABEL_DELETED') as string);
                         const _pCreationCounter: number = creationCounter + 1;
+                        setOpenConfirmDialog(false);
                         setCreationCounter(_pCreationCounter);
                     } else shoutWithSnackBar('error', getString('COULD_NOT_DELETE_LABEL') as string);
                 });
@@ -142,6 +156,25 @@ const TagMananger = (props: PrivilegePanelProps) => {
                     setCreationCounter(_pCreationCounter);
                 } else shoutWithSnackBar('error', getString('INTERNAL_SERVER_ERROR') as string);
             });
+    }
+
+    const ConfirmLabelDeletionContent = () => {
+        return (
+            <div id='label-deletion-confirm'>
+                {getString('DELETE_LABEL_CONFIRMATION_TEXT')}
+                <Typography sx={{ fontSize: 18, textAlign: 'center' }} color="text.secondary">
+                    {selectedLabel2Delete}
+                </Typography>
+                <Fab
+                    variant="extended"
+                    onClick={() => { LABEL_ACTIONS.confirmLabelDelete() }}
+                >
+                    <CheckCircleIcon sx={{ mr: 1 }} />
+                    {getString('CONFIRM')}
+                </Fab>
+
+            </div>
+        );
     }
 
     const SearchResultTable = () => {
@@ -230,6 +263,12 @@ const TagMananger = (props: PrivilegePanelProps) => {
                     message={snackBarMessage}
                     severity={snackBarSeverity}
                     open={snackBarOpen}
+                />
+                <SlideInDialog
+                    open={openConfirmDialog}
+                    close={() => { setOpenConfirmDialog(false) }}
+                    title={titleConfirmDialog}
+                    content={ConfirmLabelDeletionContent()}
                 />
                 <div id='tag-manager-wrapper'>
                     <Card>

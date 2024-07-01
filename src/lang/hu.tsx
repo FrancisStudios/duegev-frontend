@@ -71,6 +71,9 @@ const lang_hu: LanguageModel = {
     LABEL_CREATED_SUCCESSFULLY: 'Címke létrehozva',
     COULD_NOT_DELETE_LABEL: 'Hiba! A címkét nem tudtuk törölni!',
     LABEL_DELETED: 'A címke sikeresen törölve lett!',
+    CONFIRM: 'Jóváhagyás',
+    DELETE_LABEL_CONFIRMATION_TITLE: 'Címke törlése',
+    DELETE_LABEL_CONFIRMATION_TEXT: 'Biztosan törölni akarja a kiválasztott címkét?',
 }
 
 export default lang_hu;

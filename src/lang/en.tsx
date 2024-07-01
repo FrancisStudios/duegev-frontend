@@ -71,6 +71,9 @@ const lang_en: LanguageModel = {
     LABEL_CREATED_SUCCESSFULLY: 'Label created successfully!',
     COULD_NOT_DELETE_LABEL: 'Error! Could not delete label!',
     LABEL_DELETED: 'Success! The label has been deleted!',
+    CONFIRM: 'Confirm',
+    DELETE_LABEL_CONFIRMATION_TITLE: 'Delete Label',
+    DELETE_LABEL_CONFIRMATION_TEXT: 'Are you sure, you want to delete this label?',
 }
 
 export default lang_en;
