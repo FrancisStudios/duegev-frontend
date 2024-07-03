@@ -23,3 +23,17 @@
     gap: 25px;
     align-content: center;
 }
+
+#edit-label-content {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 15px;
+}
+
+.el-row {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}

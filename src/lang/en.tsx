@@ -74,6 +74,9 @@ const lang_en: LanguageModel = {
     CONFIRM: 'Confirm',
     DELETE_LABEL_CONFIRMATION_TITLE: 'Delete Label',
     DELETE_LABEL_CONFIRMATION_TEXT: 'Are you sure, you want to delete this label?',
+    EDIT_LABEL_TITLE: 'Edit label',
+    OLD_VALUES: 'Previous values',
+    NEW_VALUES: 'New values',
 }
 
 export default lang_en;

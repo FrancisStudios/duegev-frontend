@@ -72,6 +72,9 @@ export type LanguageModel = {
     CONFIRM: string,
     DELETE_LABEL_CONFIRMATION_TITLE: string,
     DELETE_LABEL_CONFIRMATION_TEXT: string,
+    EDIT_LABEL_TITLE: string,
+    OLD_VALUES: string,
+    NEW_VALUES: string,
 }
 
 export enum ValidLanguages {

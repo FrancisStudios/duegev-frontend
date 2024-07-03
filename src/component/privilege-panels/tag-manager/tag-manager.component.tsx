@@ -1,4 +1,4 @@
-import { AlertColor, AppBar, Box, Button, Card, CardActions, CardContent, Fab, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Toolbar, Typography } from '@mui/material';
+import { AlertColor, AppBar, Box, Button, Card, CardActions, CardContent, Divider, Fab, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Toolbar, Typography } from '@mui/material';
 import { UserPrivileges } from '../../../enum/privileges.enum';
 import { PrivilegePanelProps } from '../privilege-typedefinitions.type';
 import './tag-manager.component.css';
@@ -6,7 +6,7 @@ import getString from '../../../util/language-server.util';
 import SearchToolBar from '../../atomic-components/custom-search-filter-bar/custom-search-filter-bar.component';
 import LabelIcon from '@mui/icons-material/Label';
 import { Label, LabelQueryError, LabelQueryResponse } from '../../../type/label.type';
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { API } from '../../../services/API/API';
 import AddIcon from '@mui/icons-material/Add';
 import SnackBar from '../../atomic-components/snackbar/snackbar.component';
@@ -27,8 +27,12 @@ const TagMananger = (props: PrivilegePanelProps) => {
     const [creationCounter, setCreationCounter] = React.useState<number>(0);
     const [openConfirmDialog, setOpenConfirmDialog] = React.useState<boolean>(false);
     const [titleConfirmDialog, setTitleConfirmDialog] = React.useState<string>('');
-    const [selectedLabel2Delete, setSelectedLabel2Delete] = React.useState<string>('');
-    const [deleteIntent, setDeleteIntent] = React.useState<Label>({} as Label);
+    const [dialogView, setDialogView] = React.useState<ReactElement>(() => { return (<></>) });
+
+    /* Synchronous non-state management :D */
+    let selectedLabel2Delete: string = ''; const setSelectedLabel2Delete = (input: string) => { selectedLabel2Delete = input };
+    let deleteIntent: Label = {} as Label; const setDeleteIntent = (input: Label) => { deleteIntent = input };
+    let selectedLabel2Edit: Label = {} as Label; const setSelectedLabel2Edit = (input: Label) => { selectedLabel2Edit = input };
 
     const UserManagement = UserDataStore.getInstance();
 
@@ -94,6 +98,7 @@ const TagMananger = (props: PrivilegePanelProps) => {
         deleteLabel: (label: Label) => {
             setTitleConfirmDialog(getString('DELETE_LABEL_CONFIRMATION_TITLE'));
             setSelectedLabel2Delete(label.label);
+            setDialogView(ConfirmLabelDeletionContent);
             setOpenConfirmDialog(true);
             setDeleteIntent(label);
         },
@@ -112,7 +117,14 @@ const TagMananger = (props: PrivilegePanelProps) => {
         },
 
         editLabel: (label: Label) => {
-            console.log('edit', label);
+            setTitleConfirmDialog(getString('EDIT_LABEL_TITLE'));
+            setSelectedLabel2Edit(label);
+            setDialogView(EditLabelContent);
+            setOpenConfirmDialog(true);
+        },
+
+        confirmLabelEdit: () => {
+
         }
     }
 
@@ -173,6 +185,47 @@ const TagMananger = (props: PrivilegePanelProps) => {
                     {getString('CONFIRM')}
                 </Fab>
 
+            </div>
+        );
+    }
+
+
+    const EditLabelContent = () => {
+        return (
+            <div id="edit-label-content">
+                {getString('OLD_VALUES')}
+                <div className="el-row">
+                    <TextField
+                        id="label-name-old"
+                        label={getString('LABEL')}
+                        variant="outlined"
+                        value={selectedLabel2Edit.label}
+                        disabled
+                    />
+                    <TextField
+                        id="label-desc-old"
+                        label={getString('DESCRIPTION')}
+                        variant="outlined"
+                        value={selectedLabel2Edit.description}
+                        disabled
+                    />
+                </div>
+                <Divider />
+                {getString('NEW_VALUES')}
+                <div className="el-row">
+                    <TextField id="label-name-new" label={getString('LABEL')} variant="outlined" />
+                    <TextField id="label-desc-new" label={getString('DESCRIPTION')} variant="outlined" />
+                </div>
+                <Fab
+                    variant="extended"
+                    onClick={() => { LABEL_ACTIONS.confirmLabelEdit() }}
+                    sx={{
+                        marginTop: '20px'
+                    }}
+                >
+                    <CheckCircleIcon sx={{ mr: 1 }} />
+                    {getString('CONFIRM')}
+                </Fab>
             </div>
         );
     }
@@ -268,7 +321,7 @@ const TagMananger = (props: PrivilegePanelProps) => {
                     open={openConfirmDialog}
                     close={() => { setOpenConfirmDialog(false) }}
                     title={titleConfirmDialog}
-                    content={ConfirmLabelDeletionContent()}
+                    content={dialogView}
                 />
                 <div id='tag-manager-wrapper'>
                     <Card>

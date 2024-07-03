@@ -74,6 +74,9 @@ const lang_hu: LanguageModel = {
     CONFIRM: 'Jóváhagyás',
     DELETE_LABEL_CONFIRMATION_TITLE: 'Címke törlése',
     DELETE_LABEL_CONFIRMATION_TEXT: 'Biztosan törölni akarja a kiválasztott címkét?',
+    EDIT_LABEL_TITLE: 'Címke szerkesztése',
+    OLD_VALUES: 'Korábbi értékek',
+    NEW_VALUES: 'Új értékek',
 }
 
 export default lang_hu;
