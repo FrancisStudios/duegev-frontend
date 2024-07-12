@@ -25,6 +25,21 @@ export type LabelQueryResponse = {
     data: Array<Label> | LabelQueryError
 }
 
+
+export type LabelUpdateQuery = {
+    intent: DuegevAPIIntents.UPDATE_LABEL,
+    query: {
+        session_token: string,
+        updatedLabel: Label
+    }
+}
+
+export type LabelUpdateResponse = {
+    intent: DuegevAPIIntents,
+    message: DuegevAPIResponseMessage,
+    data: Label | LabelQueryError
+}
+
 export enum LabelQueryError {
     INVALID_SESSION_TOKEN = 'invalid_session_token',
     INSUFFICIENT_PRIVILEGES = 'insufficient_privileges',
